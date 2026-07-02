@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -53,7 +53,7 @@
                     <div class="dropdown-content">
                         <a href="#" data-page="components" onclick="navigateTo('components')">Component Universe</a>
                         <a href="#" data-page="projects" onclick="navigateTo('projects')">Project Database</a>
-                        <a href="#" data-page="portfolio" onclick="navigateTo('portfolio')">Workshop Portfolio</a>
+                        <a href="#" data-page="portfolio" onclick="navigateTo('portfolio')">Portfolio</a>
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
             <div class="mobile-submenu-title">Explore Universe</div>
             <a href="#" class="mobile-nav-link indent" data-page="components" onclick="navigateTo('components')">Component Universe</a>
             <a href="#" class="mobile-nav-link indent" data-page="projects" onclick="navigateTo('projects')">Project Database</a>
-            <a href="#" class="mobile-nav-link indent" data-page="portfolio" onclick="navigateTo('portfolio')">Workshop Portfolio</a>
+            <a href="#" class="mobile-nav-link indent" data-page="portfolio" onclick="navigateTo('portfolio')">Portfolio</a>
             <div class="mobile-submenu-title">Connect</div>
             <a href="#" class="mobile-nav-link" data-page="community" onclick="navigateTo('community')">Community</a>
             <a href="#" class="mobile-nav-link" data-page="contact" onclick="navigateTo('contact')">Contact Us</a>
@@ -430,84 +430,158 @@
                             </div>
 
                             <form id="workshop-registration-form" onsubmit="handleRegistrationSubmit(event)">
-                                <div class="form-group-row">
-                                    <div class="form-group">
-                                        <label for="student-name">Student Name *</label>
-                                        <input type="text" id="student-name" required placeholder="e.g., Aarav Sharma">
+
+                                <div class="wizard-steps">
+                                    <div class="wizard-step-dot active" data-step-dot="1">
+                                        <span class="wizard-step-circle">1</span>
+                                        <span class="wizard-step-label">Student</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="parent-name">Parent Name *</label>
-                                        <input type="text" id="parent-name" required placeholder="e.g., Priya Sharma">
+                                    <div class="wizard-step-connector"></div>
+                                    <div class="wizard-step-dot" data-step-dot="2">
+                                        <span class="wizard-step-circle">2</span>
+                                        <span class="wizard-step-label">Academic</span>
+                                    </div>
+                                    <div class="wizard-step-connector"></div>
+                                    <div class="wizard-step-dot" data-step-dot="3">
+                                        <span class="wizard-step-circle">3</span>
+                                        <span class="wizard-step-label">Preferences</span>
                                     </div>
                                 </div>
 
-                                <div class="form-group-row">
-                                    <div class="form-group">
-                                        <label for="mobile-num">Mobile Number *</label>
-                                        <input type="tel" id="mobile-num" required placeholder="e.g., +91 98765 43210">
+                                <div class="form-step active" data-step="1">
+                                    <div class="form-group-row">
+                                        <div class="form-group">
+                                            <label for="student-name" class="field-label-float">Student Name *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+                                                <input type="text" id="student-name" required placeholder="e.g., Aarav Sharma">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="parent-name" class="field-label-float">Parent Name *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+                                                <input type="text" id="parent-name" required placeholder="e.g., Priya Sharma">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="whatsapp-num">WhatsApp Number *</label>
-                                        <input type="tel" id="whatsapp-num" required placeholder="e.g., +91 98765 43210">
+
+                                    <div class="form-group-row">
+                                        <div class="form-group">
+                                            <label for="mobile-num" class="field-label-float">Mobile Number *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+                                                <input type="tel" id="mobile-num" required inputmode="numeric" pattern="[0-9]{10,}" minlength="10" placeholder="9876543210">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="whatsapp-num" class="field-label-float">WhatsApp Number *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+                                                <input type="tel" id="whatsapp-num" required inputmode="numeric" pattern="[0-9]{10,}" minlength="10" placeholder="9876543210">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-step-nav">
+                                        <button type="button" class="btn btn-cta-playful wizard-next-btn" data-next-target="2">Continue</button>
                                     </div>
                                 </div>
 
-                                <div class="form-group-row">
-                                    <div class="form-group">
-                                        <label for="student-email">Email Address *</label>
-                                        <input type="email" id="student-email" required placeholder="e.g., parent@email.com">
+                                <div class="form-step" data-step="2">
+                                    <div class="form-group-row">
+                                        <div class="form-group">
+                                            <label for="student-email" class="field-label-float">Email Address *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22 6 12 13 2 6"></polyline></svg></span>
+                                                <input type="email" id="student-email" required placeholder="e.g., parent@email.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="student-grade" class="field-label-float">Grade *</label>
+                                            <div class="field-shell field-shell--select custom-select">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"></path><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"></path></svg></span>
+                                                <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                                    <span class="custom-select-value placeholder">Select Grade</span>
+                                                </button>
+                                                <svg class="custom-select-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                                <select id="student-grade" required class="custom-select-native" tabindex="-1" aria-hidden="true">
+                                                    <option value="">Select Grade</option>
+                                                    <option value="6">Grade 6 (Age 10-11)</option>
+                                                    <option value="7">Grade 7 (Age 11-12)</option>
+                                                    <option value="8">Grade 8 (Age 12-13)</option>
+                                                    <option value="9">Grade 9 (Age 13-14)</option>
+                                                    <option value="10">Grade 10 (Age 14-15)</option>
+                                                    <option value="11">Grade 11 (Age 15-16)</option>
+                                                    <option value="12">Grade 12 (Age 16-18)</option>
+                                                </select>
+                                                <ul class="custom-select-list" role="listbox"></ul>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="student-grade">Grade *</label>
-                                        <select id="student-grade" required>
-                                            <option value="">Select Grade</option>
-                                            <option value="6">Grade 6 (Age 10-11)</option>
-                                            <option value="7">Grade 7 (Age 11-12)</option>
-                                            <option value="8">Grade 8 (Age 12-13)</option>
-                                            <option value="9">Grade 9 (Age 13-14)</option>
-                                            <option value="10">Grade 10 (Age 14-15)</option>
-                                            <option value="11">Grade 11 (Age 15-16)</option>
-                                            <option value="12">Grade 12 (Age 16-18)</option>
-                                        </select>
+
+                                    <div class="form-group-row">
+                                        <div class="form-group">
+                                            <label for="school-name" class="field-label-float">School Name *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
+                                                <input type="text" id="school-name" required placeholder="e.g., Delhi Public School">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="city-name" class="field-label-float">City *</label>
+                                            <div class="field-shell">
+                                                <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+                                                <input type="text" id="city-name" required placeholder="e.g., Bengaluru">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-step-nav">
+                                        <button type="button" class="btn btn-secondary wizard-back-btn" data-back-target="1">Back</button>
+                                        <button type="button" class="btn btn-cta-playful wizard-next-btn" data-next-target="3">Continue</button>
                                     </div>
                                 </div>
 
-                                <div class="form-group-row">
+                                <div class="form-step" data-step="3">
                                     <div class="form-group">
-                                        <label for="school-name">School Name *</label>
-                                        <input type="text" id="school-name" required placeholder="e.g., Delhi Public School">
+                                        <label for="prev-exp" class="field-label-float">Previous Coding/Electronics Experience (Optional)</label>
+                                        <div class="field-shell field-shell--select custom-select">
+                                            <span class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A6 6 0 1 0 8 9.5c0 1.5.5 2.5 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg></span>
+                                            <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                                                <span class="custom-select-value">Beginner - Never coded/assembled hardware</span>
+                                            </button>
+                                            <svg class="custom-select-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                            <select id="prev-exp" class="custom-select-native" tabindex="-1" aria-hidden="true">
+                                                <option value="none">Beginner - Never coded/assembled hardware</option>
+                                                <option value="scratch">Familiar with Scratch/block programming</option>
+                                                <option value="python-basics">Familiar with text languages (Python, C++)</option>
+                                                <option value="arduino-esp">Have built projects on Arduino or ESP32 before</option>
+                                            </select>
+                                            <ul class="custom-select-list" role="listbox"></ul>
+                                        </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="city-name">City *</label>
-                                        <input type="text" id="city-name" required placeholder="e.g., Bengaluru">
+                                        <label>Technologies they are interested in (Select multiple)</label>
+                                        <div class="checkbox-pill-grid">
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="ai"> AI</label>
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="ml"> Machine Learning</label>
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="robotics"> Robotics</label>
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="drones"> Drones</label>
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="iot" checked> IoT</label>
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="embedded"> Microcontrollers</label>
+                                            <label class="check-pill"><input type="checkbox" name="interest" value="printing"> 3D Printing</label>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="prev-exp">Previous Coding/Electronics Experience (Optional)</label>
-                                    <select id="prev-exp">
-                                        <option value="none">Beginner - Never coded/assembled hardware</option>
-                                        <option value="scratch">Familiar with Scratch/block programming</option>
-                                        <option value="python-basics">Familiar with text languages (Python, C++)</option>
-                                        <option value="arduino-esp">Have built projects on Arduino or ESP32 before</option>
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Technologies they are interested in (Select multiple)</label>
-                                    <div class="checkbox-pill-grid">
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="ai"> AI</label>
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="ml"> Machine Learning</label>
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="robotics"> Robotics</label>
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="drones"> Drones</label>
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="iot" checked> IoT</label>
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="embedded"> Microcontrollers</label>
-                                        <label class="check-pill"><input type="checkbox" name="interest" value="printing"> 3D Printing</label>
+                                    <div class="form-step-nav">
+                                        <button type="button" class="btn btn-secondary wizard-back-btn" data-back-target="2">Back</button>
+                                        <button type="submit" class="btn btn-cta-playful">Reserve My Free Seat</button>
                                     </div>
+                                    <p class="form-disclosure">No payment required. Seats are confirmed on a first-come, first-served basis.</p>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary btn-block btn-glow">Reserve My Free Seat</button>
-                                <p class="form-disclosure">No payment required. Seats are confirmed on a first-come, first-served basis.</p>
                             </form>
                         </div>
 
@@ -1446,54 +1520,131 @@
         <section id="portfolio-view" class="view-panel">
             <div class="container page-content">
                 <div class="section-header">
-                    <h1 class="page-title">Workshop Portfolio</h1>
+                    <h1 class="page-title">Portfolio</h1>
                     <p class="section-subtitle">Highlights from our live cohorts, hands-on student demos, and robotics testing sessions.</p>
                 </div>
 
                 <!-- Grid categories filter -->
                 <div class="filter-pills-row centered">
                     <button class="pill active" data-portfolio-filter="all" onclick="filterPortfolio('all')">All Images</button>
-                    <button class="pill" data-portfolio-filter="workshop" onclick="filterPortfolio('workshop')">Live Workshops</button>
-                    <button class="pill" data-portfolio-filter="drone" onclick="filterPortfolio('drone')">Drone Flight Demos</button>
-                    <button class="pill" data-portfolio-filter="robotics" onclick="filterPortfolio('robotics')">Robotics Labs</button>
-                    <button class="pill" data-portfolio-filter="student" onclick="filterPortfolio('student')">Student Projects</button>
+                    <button class="pill" data-portfolio-filter="training" onclick="filterPortfolio('training')">Training Programmes</button>
+                    <button class="pill" data-portfolio-filter="workshop" onclick="filterPortfolio('workshop')">Hands-On Workshops</button>
+                    <button class="pill" data-portfolio-filter="seminar" onclick="filterPortfolio('seminar')">Seminars &amp; Talks</button>
+                    <button class="pill" data-portfolio-filter="architecture" onclick="filterPortfolio('architecture')">Architecture &amp; Industry</button>
+                    <button class="pill" data-portfolio-filter="defence" onclick="filterPortfolio('defence')">Defence &amp; Military</button>
                 </div>
 
                 <!-- Gallery grid -->
                 <div class="portfolio-gallery-grid" id="portfolio-gallery-container">
-                    <!-- Photo 1 -->
-                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/workshop_screenshot.png', 'Live mentorship showing student DHT sensor setup.')">
-                        <img src="assets/workshop_screenshot.png" alt="Free Workshop Preview" class="gallery-img">
+                    <div class="gallery-item glass-card" data-group="training" onclick="openLightbox('assets/events/workshop-1.webp', 'One-week Short Term Training Programme on Advancements in GIS and Drones with AI, hosted at BMS Institute of Technology and Management, March 2025.')">
+                        <img src="assets/events/workshop-1.webp" alt="STTP on GIS and Drones with AI" class="gallery-img">
                         <div class="gallery-overlay">
-                            <span class="gallery-cat-label">WORKSHOP</span>
-                            <h4>IoT Live Mentoring Session</h4>
+                            <h4>STTP on GIS and Drones with AI</h4>
                         </div>
                     </div>
 
-                    <!-- Photo 2 -->
-                    <div class="gallery-item glass-card" data-group="student" onclick="openLightbox('assets/home_screenshot.png', 'Landing page preview displaying drones and arms in action.')">
-                        <img src="assets/home_screenshot.png" alt="STEM Platform Preview" class="gallery-img">
+                    <div class="gallery-item glass-card" data-group="training" onclick="openLightbox('assets/events/workshop-2.webp', 'Hands-on drone flight training session covering piloting fundamentals and FPV techniques.')">
+                        <img src="assets/events/workshop-2.webp" alt="Drone Flight Training" class="gallery-img">
                         <div class="gallery-overlay">
-                            <span class="gallery-cat-label">STUDENT</span>
-                            <h4>Smart Rover Telemetry Output</h4>
+                            <h4>Drone Flight Training</h4>
                         </div>
                     </div>
 
-                    <!-- Photo 3 -->
-                    <div class="gallery-item glass-card" data-group="drone" onclick="openLightbox('assets/logo.jpg', 'BuildVerse design logo highlighting neon green circuit paths.')">
-                        <img src="assets/logo.jpg" alt="Drone flight tracking" class="gallery-img">
+                    <div class="gallery-item glass-card" data-group="seminar" onclick="openLightbox('assets/events/workshop-5.webp', 'Seminar exploring the latest advancements in drone technology and real-world applications.')">
+                        <img src="assets/events/workshop-5.webp" alt="Drone Technology Seminar" class="gallery-img">
                         <div class="gallery-overlay">
-                            <span class="gallery-cat-label">DRONES</span>
-                            <h4>Autonomous Drone Testing</h4>
+                            <h4>Drone Technology Seminar</h4>
                         </div>
                     </div>
 
-                    <!-- Photo 4 -->
-                    <div class="gallery-item glass-card" data-group="robotics" onclick="openLightbox('assets/workshop_screenshot.png', 'Students coding robotics kinematics.')">
-                        <img src="assets/workshop_screenshot.png" alt="Robotics arm workspace" class="gallery-img">
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/events/workshop-4.webp', 'In-depth lab session covering drone electronics, flight controllers, and configuration.')">
+                        <img src="assets/events/workshop-4.webp" alt="Advanced Drone Technology Lab" class="gallery-img">
                         <div class="gallery-overlay">
-                            <span class="gallery-cat-label">ROBOTICS</span>
-                            <h4>Dynamic Arm Sorting Lab</h4>
+                            <h4>Advanced Drone Technology Lab</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/events/workshop-3.webp', 'Students assembling and configuring an FPV drone build during a hands-on session.')">
+                        <img src="assets/events/workshop-3.webp" alt="FPV Drone Build Session" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>FPV Drone Build Session</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/events/workshop-6.webp', 'Guided student project focused on building a custom drone configuration.')">
+                        <img src="assets/events/workshop-6.webp" alt="Student Drone Project" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Student Drone Project</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/events/workshop-9.webp', 'Engineering students building and wiring a drone frame during an assembly workshop.')">
+                        <img src="assets/events/workshop-9.webp" alt="Drone Assembly Workshop" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Drone Assembly Workshop</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="seminar" onclick="openLightbox('assets/events/workshop-10.webp', 'Technical presentation on drone technology applications for industry and academia.')">
+                        <img src="assets/events/workshop-10.webp" alt="Technical Presentation" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Technical Presentation</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/events/workshop-11.webp', 'Showcasing completed student drone builds and live flight demonstrations.')">
+                        <img src="assets/events/workshop-11.webp" alt="Workshop Showcase" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Workshop Showcase</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/events/workshop-12.webp', 'Interactive drone technology session held at an engineering college.')">
+                        <img src="assets/events/workshop-12.webp" alt="College Workshop Session" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>College Workshop Session</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="architecture" onclick="openLightbox('assets/events/bms-architecture-workshop.webp', '&quot;Future of Architecture with Drones&quot; — a workshop exploring drone applications in architecture, hosted at BMS School of Architecture, June 2025.')">
+                        <img src="assets/events/bms-architecture-workshop.webp" alt="Future of Architecture with Drones" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Future of Architecture with Drones</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="architecture" onclick="openLightbox('assets/events/bms-event.webp', &quot;Exploring drone technology's role in architectural surveying and design at BMS School of Architecture.&quot;)">
+                        <img src="assets/events/bms-event.webp" alt="BMS Architecture Event" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>BMS Architecture Event</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="defence" onclick="openLightbox('assets/events/army-1.webp', 'Drone technology demonstration for defence and military applications.')">
+                        <img src="assets/events/army-1.webp" alt="Defence Demonstration" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Defence Demonstration</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="defence" onclick="openLightbox('assets/events/army-2.webp', 'Field operations and drone deployment with Indian Army personnel.')">
+                        <img src="assets/events/army-2.webp" alt="Military Drone Operations" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Military Drone Operations</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="defence" onclick="openLightbox('assets/events/army-4.webp', 'Demonstrating tactical drone capabilities for defence applications.')">
+                        <img src="assets/events/army-4.webp" alt="Tactical Aerial Systems" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Tactical Aerial Systems</h4>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item glass-card" data-group="defence training" onclick="openLightbox('assets/events/army-5.webp', 'Training session building partnerships for next-generation defence drone systems.')">
+                        <img src="assets/events/army-5.webp" alt="Training" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h4>Training</h4>
                         </div>
                     </div>
                 </div>
@@ -2415,7 +2566,7 @@
                     <li><a href="#" onclick="navigateTo('components')">Component Universe</a></li>
                     <li><a href="#" onclick="navigateTo('projects')">Project Database</a></li>
                     <li><a href="#" onclick="navigateTo('competition')">Competition Arena</a></li>
-                    <li><a href="#" onclick="navigateTo('portfolio')">Workshop Portfolio</a></li>
+                    <li><a href="#" onclick="navigateTo('portfolio')">Portfolio</a></li>
                 </ul>
             </div>
 

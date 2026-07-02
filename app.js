@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initSPA();
     initCanvasParticles();
     initHeroShowcase();
+    initRegistrationWizard();
+    initCustomSelects();
     initStatsCounter();
     initCountdownTimer();
     initSeatsSimulation();
@@ -407,6 +409,174 @@ function selectMembership(planName) {
 
 
 /* ================= 7. FREE WORKSHOP REGISTRATION SYSTEM ================= */
+
+/* ---- Multi-Step Wizard Controller ---- */
+let wsCurrentWizardStep = 1;
+
+function initRegistrationWizard() {
+    const form = document.getElementById('workshop-registration-form');
+    if (!form) return;
+
+    form.querySelectorAll('.wizard-next-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (validateWizardStep(wsCurrentWizardStep)) {
+                goToWizardStep(parseInt(btn.dataset.nextTarget, 10));
+            }
+        });
+    });
+
+    form.querySelectorAll('.wizard-back-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            goToWizardStep(parseInt(btn.dataset.backTarget, 10));
+        });
+    });
+
+    // Strip any non-digit character as the user types (numbers only, 10-digit phone fields)
+    ['mobile-num', 'whatsapp-num'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', () => {
+            const digitsOnly = el.value.replace(/\D/g, '');
+            if (digitsOnly !== el.value) el.value = digitsOnly;
+        });
+    });
+}
+
+/* ---- Custom Dropdown Controller (progressive enhancement over native <select>) ---- */
+function initCustomSelects() {
+    document.querySelectorAll('.custom-select').forEach(wrapper => {
+        const nativeSelect = wrapper.querySelector('select');
+        const trigger = wrapper.querySelector('.custom-select-trigger');
+        const valueEl = wrapper.querySelector('.custom-select-value');
+        const listEl = wrapper.querySelector('.custom-select-list');
+        if (!nativeSelect || !trigger || !valueEl || !listEl) return;
+
+        let highlightedIndex = -1;
+
+        const getOptionEls = () => Array.from(listEl.querySelectorAll('.custom-select-option'));
+
+        function buildOptions() {
+            listEl.innerHTML = '';
+            Array.from(nativeSelect.options).forEach((opt, idx) => {
+                const li = document.createElement('li');
+                li.className = 'custom-select-option';
+                li.setAttribute('role', 'option');
+                li.dataset.value = opt.value;
+                li.textContent = opt.textContent;
+                if (opt.value === nativeSelect.value) li.classList.add('selected');
+                li.addEventListener('click', () => selectOption(opt.value, opt.textContent));
+                li.addEventListener('mouseenter', () => setHighlighted(idx));
+                listEl.appendChild(li);
+            });
+        }
+
+        function setHighlighted(idx) {
+            const options = getOptionEls();
+            options.forEach(o => o.classList.remove('highlighted'));
+            if (options[idx]) {
+                options[idx].classList.add('highlighted');
+                options[idx].scrollIntoView({ block: 'nearest' });
+            }
+            highlightedIndex = idx;
+        }
+
+        function syncDisplay() {
+            const opt = nativeSelect.options[nativeSelect.selectedIndex];
+            valueEl.textContent = opt ? opt.textContent : '';
+            valueEl.classList.toggle('placeholder', !nativeSelect.value);
+            getOptionEls().forEach(li => li.classList.toggle('selected', li.dataset.value === nativeSelect.value));
+        }
+
+        function selectOption(value) {
+            nativeSelect.value = value;
+            nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            closeDropdown();
+            trigger.focus();
+        }
+
+        function openDropdown() {
+            document.querySelectorAll('.custom-select.open').forEach(w => { if (w !== wrapper) w.classList.remove('open'); });
+            wrapper.classList.add('open');
+            trigger.setAttribute('aria-expanded', 'true');
+            const selectedIdx = Array.from(nativeSelect.options).findIndex(o => o.value === nativeSelect.value);
+            setHighlighted(selectedIdx >= 0 ? selectedIdx : 0);
+        }
+
+        function closeDropdown() {
+            wrapper.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            wrapper.classList.contains('open') ? closeDropdown() : openDropdown();
+        });
+
+        trigger.addEventListener('keydown', (e) => {
+            const options = getOptionEls();
+            if (!wrapper.classList.contains('open')) {
+                if (['Enter', ' ', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
+                    e.preventDefault();
+                    openDropdown();
+                }
+                return;
+            }
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeDropdown();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                setHighlighted(Math.min(highlightedIndex + 1, options.length - 1));
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                setHighlighted(Math.max(highlightedIndex - 1, 0));
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const opt = options[highlightedIndex];
+                if (opt) selectOption(opt.dataset.value);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!wrapper.contains(e.target)) closeDropdown();
+        });
+
+        nativeSelect.addEventListener('change', syncDisplay);
+
+        buildOptions();
+        syncDisplay();
+        wrapper.classList.add('js-enhanced');
+    });
+}
+
+function validateWizardStep(stepNum) {
+    const stepEl = document.querySelector(`.form-step[data-step="${stepNum}"]`);
+    if (!stepEl) return true;
+    const controls = stepEl.querySelectorAll('input, select, textarea');
+    for (const control of controls) {
+        if (!control.reportValidity()) return false;
+    }
+    return true;
+}
+
+function goToWizardStep(stepNum) {
+    wsCurrentWizardStep = stepNum;
+    document.querySelectorAll('.form-step').forEach(step => {
+        step.classList.toggle('active', parseInt(step.dataset.step, 10) === stepNum);
+    });
+    document.querySelectorAll('.wizard-step-dot').forEach(dot => {
+        const dotStep = parseInt(dot.dataset.stepDot, 10);
+        dot.classList.toggle('active', dotStep === stepNum);
+        dot.classList.toggle('completed', dotStep < stepNum);
+    });
+    const wrapper = document.getElementById('registration-card-wrapper');
+    if (wrapper) wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetWizardToStep(stepNum = 1) {
+    goToWizardStep(stepNum);
+}
+
 async function handleRegistrationSubmit(event) {
     event.preventDefault();
 
@@ -496,9 +666,13 @@ async function handleRegistrationSubmit(event) {
 }
 
 function resetRegistrationForm() {
-    document.getElementById('workshop-registration-form').reset();
+    const form = document.getElementById('workshop-registration-form');
+    form.reset();
+    // form.reset() doesn't fire 'change' on selects — resync the custom dropdown display
+    form.querySelectorAll('select').forEach(sel => sel.dispatchEvent(new Event('change', { bubbles: true })));
     document.getElementById('registration-success-wrapper').classList.add('hidden');
     document.getElementById('registration-card-wrapper').classList.remove('hidden');
+    resetWizardToStep(1);
 }
 
 
@@ -1196,10 +1370,11 @@ function filterPortfolio(group) {
     });
     document.querySelector(`[data-portfolio-filter="${group}"]`).classList.add('active');
 
-    // Filter items
+    // Filter items (data-group may hold multiple space-separated categories)
     const items = document.querySelectorAll('#portfolio-gallery-container .gallery-item');
     items.forEach(item => {
-        if (group === 'all' || item.getAttribute('data-group') === group) {
+        const itemGroups = item.getAttribute('data-group').split(' ');
+        if (group === 'all' || itemGroups.includes(group)) {
             item.style.display = 'block';
         } else {
             item.style.display = 'none';

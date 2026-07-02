@@ -26,6 +26,13 @@
     --gradient-glow-cyan: radial-gradient(circle, rgba(var(--color-accent-cyan-rgb), 0.15) 0%, rgba(0,0,0,0) 70%);
     --gradient-glow-green: radial-gradient(circle, rgba(var(--color-accent-green-rgb), 0.15) 0%, rgba(0,0,0,0) 70%);
 
+    /* Playful glassmorphism extension — used only by the registration wizard */
+    --gradient-playful: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+    --color-playful-purple-rgb: 167, 139, 250;
+    --color-playful-pink-rgb: 244, 114, 182;
+    --shadow-playful-glow: 0 0 20px rgba(var(--color-playful-purple-rgb), 0.25);
+    --shadow-playful-glow-strong: 0 0 28px rgba(var(--color-playful-purple-rgb), 0.45), 0 0 14px rgba(var(--color-playful-pink-rgb), 0.3);
+
     /* Typography */
     --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -475,6 +482,46 @@ h1, h2, h3, h4, h5, h6 {
     animation: neonPulse 1.5s infinite alternate;
 }
 
+/* Playful gradient CTA — scoped to the registration wizard, does not alter .btn-primary/.btn-glow used elsewhere */
+.btn-cta-playful {
+    background: var(--gradient-playful);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+    color: #0a0a12;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(var(--color-playful-purple-rgb), 0.35);
+    transition: var(--transition-smooth), background-position 0.6s ease;
+}
+
+.btn-cta-playful:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: var(--shadow-playful-glow-strong);
+    opacity: 1;
+}
+
+.btn-cta-playful::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.btn-cta-playful:hover::after {
+    animation: playfulShimmer 1.1s ease-in-out;
+}
+
+@keyframes playfulShimmer {
+    0%   { left: -60%; }
+    100% { left: 130%; }
+}
+
 /* ================= FORMS INPUT ELEMENTS ================= */
 .form-group {
     display: flex;
@@ -520,6 +567,196 @@ select:focus {
     box-shadow: var(--shadow-cyan-glow);
 }
 
+/* Registration wizard: field label (gradient, sits above the box — same for inputs & selects) */
+.field-label-float {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    background: var(--gradient-playful);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Registration wizard: field shell (icon + input/select box) */
+.field-shell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease-out;
+}
+
+.field-shell .field-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    display: flex;
+    color: var(--color-text-secondary);
+    pointer-events: none;
+    transition: var(--transition-fast);
+    z-index: 1;
+}
+
+.field-shell input[type="text"],
+.field-shell input[type="email"],
+.field-shell input[type="tel"],
+.field-shell--select select {
+    padding-left: 2.6rem;
+    height: 3rem;
+}
+
+.field-shell:has(input:focus) .field-icon,
+.field-shell--select:has(select:focus) .field-icon,
+.custom-select.open .field-icon,
+.custom-select:has(.custom-select-trigger:focus-visible) .field-icon {
+    color: #a78bfa;
+    filter: drop-shadow(0 0 6px rgba(var(--color-playful-purple-rgb), 0.7));
+}
+
+.field-shell:has(input:focus),
+.field-shell--select:has(select:focus) {
+    transform: translateY(-1px) scale(1.01);
+}
+
+.field-shell input:focus,
+.field-shell--select select:focus {
+    border-color: #a78bfa;
+    box-shadow: var(--shadow-playful-glow);
+}
+
+/* Guarantee readable native dropdown options against the dark theme (no-JS fallback) */
+#workshop-registration-form select option {
+    background: var(--color-bg-surface-secondary);
+    color: var(--color-text-primary);
+}
+
+/* Custom dropdown — progressive enhancement over the native <select>.
+   Hidden until initCustomSelects() adds .js-enhanced, so the plain <select>
+   remains fully usable if JS fails to load. */
+.custom-select-trigger,
+.custom-select-chevron,
+.custom-select-list {
+    display: none;
+}
+
+.custom-select.js-enhanced .custom-select-native {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-select.js-enhanced .custom-select-trigger {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 0.75rem 2.4rem 0.75rem 2.6rem;
+    color: var(--color-text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.custom-select-trigger:hover {
+    border-color: rgba(167, 139, 250, 0.4);
+}
+
+.custom-select-trigger:focus-visible,
+.custom-select.open .custom-select-trigger {
+    outline: none;
+    border-color: #a78bfa;
+    box-shadow: var(--shadow-playful-glow);
+}
+
+.custom-select-value {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.custom-select-value.placeholder {
+    color: var(--color-text-secondary);
+}
+
+.custom-select.js-enhanced .custom-select-chevron {
+    display: flex;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-secondary);
+    transition: transform 0.25s ease, color 0.2s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.custom-select.open .custom-select-chevron {
+    transform: translateY(-50%) rotate(180deg);
+    color: #a78bfa;
+}
+
+.custom-select.js-enhanced .custom-select-list {
+    display: block;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: var(--color-bg-surface-secondary);
+    border: 1px solid rgba(var(--color-playful-purple-rgb), 0.3);
+    border-radius: 12px;
+    box-shadow: var(--shadow-premium), var(--shadow-playful-glow);
+    max-height: 260px;
+    overflow-y: auto;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    padding: 0.4rem;
+    list-style: none;
+    margin: 0;
+}
+
+.custom-select.open .custom-select-list {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-select-option {
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.custom-select-option:hover,
+.custom-select-option.highlighted {
+    background: rgba(var(--color-playful-purple-rgb), 0.18);
+    color: var(--color-text-primary);
+}
+
+.custom-select-option.selected {
+    background: rgba(var(--color-playful-purple-rgb), 0.28);
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
 /* Checkbox pill selector design */
 .checkbox-pill-grid {
     display: flex;
@@ -547,11 +784,110 @@ select:focus {
     display: none;
 }
 
+@keyframes pillPop {
+    0%   { transform: scale(1); }
+    45%  { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
 .check-pill:has(input:checked) {
-    background: rgba(var(--color-accent-cyan-rgb), 0.1);
-    border-color: var(--color-accent-cyan);
+    background: rgba(var(--color-playful-purple-rgb), 0.12);
+    border-color: #a78bfa;
     color: var(--color-text-primary);
-    box-shadow: 0 0 10px rgba(var(--color-accent-cyan-rgb), 0.15);
+    box-shadow: 0 0 10px rgba(var(--color-playful-purple-rgb), 0.2);
+    animation: pillPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Registration wizard: step indicator + step panels */
+.wizard-steps {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.wizard-step-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0.5;
+    transition: var(--transition-smooth);
+}
+
+.wizard-step-dot.active,
+.wizard-step-dot.completed {
+    opacity: 1;
+}
+
+.wizard-step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border-subtle);
+    transition: var(--transition-smooth);
+}
+
+.wizard-step-dot.active .wizard-step-circle {
+    background: var(--gradient-playful);
+    color: #0a0a12;
+    animation: dotPulse 1.6s ease-in-out infinite;
+    border-color: transparent;
+}
+
+.wizard-step-dot.completed .wizard-step-circle {
+    background: rgba(var(--color-playful-purple-rgb), 0.15);
+    border-color: #a78bfa;
+    color: #a78bfa;
+}
+
+@keyframes dotPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(var(--color-playful-purple-rgb), 0.5); }
+    50%      { box-shadow: 0 0 0 6px rgba(var(--color-playful-purple-rgb), 0); }
+}
+
+.wizard-step-label {
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.03em;
+}
+
+.wizard-step-connector {
+    flex: 1;
+    height: 1px;
+    background: var(--color-border-subtle);
+    margin: 0 0.5rem;
+    max-width: 48px;
+}
+
+.form-step {
+    display: none;
+    animation: formStepFade 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.form-step.active {
+    display: block;
+}
+
+@keyframes formStepFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.form-step-nav {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.form-step-nav .btn {
+    flex: 1;
 }
 
 /* ================= SECTION HEADERS ================= */
@@ -938,8 +1274,8 @@ select:focus {
 /* ================= 2. WORKSHOP VIEW STYLES ================= */
 .workshop-layout-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 4rem;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 3rem;
     align-items: flex-start;
 }
 
@@ -1091,7 +1427,19 @@ select:focus {
 /* Registration Form Card */
 .registration-form-card {
     padding: 2.5rem;
-    background: radial-gradient(circle at 100% 0%, rgba(var(--color-accent-cyan-rgb), 0.03) 0%, rgba(0,0,0,0) 70%), rgba(255, 255, 255, 0.03);
+    background:
+        radial-gradient(circle at 100% 0%, rgba(var(--color-accent-cyan-rgb), 0.03) 0%, rgba(0,0,0,0) 70%),
+        radial-gradient(circle at 0% 0%, rgba(var(--color-playful-purple-rgb), 0.05) 0%, rgba(0,0,0,0) 60%),
+        radial-gradient(circle at 100% 100%, rgba(var(--color-playful-pink-rgb), 0.04) 0%, rgba(0,0,0,0) 60%),
+        rgba(255, 255, 255, 0.03);
+}
+
+.registration-form-card .form-group-row {
+    gap: 1.25rem;
+}
+
+.registration-form-card .form-group {
+    margin-bottom: 1.5rem;
 }
 
 .form-header {
@@ -2150,8 +2498,15 @@ input:checked + .slider:before {
 }
 
 .gallery-overlay h4 {
-    font-size: 1rem;
-    color: #fff;
+    display: inline-block;
+    font-family: 'Space Grotesk', var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #000000;
+    background: #ffffff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
 }
 
 /* Testimonials Layout */
@@ -3205,6 +3560,18 @@ input:checked + .slider:before {
         --card-w: 96px;
         --card-h: 135px;
         --card-gap: 12px;
+    }
+
+    .registration-form-card .form-group-row {
+        grid-template-columns: 1fr;
+    }
+
+    .wizard-step-label {
+        display: none;
+    }
+
+    .wizard-steps {
+        margin-bottom: 1.5rem;
     }
 
     .stats-grid {
