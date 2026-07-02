@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildVerse | Build. Compete. Innovate.</title>
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Premium STEM Education platform offering live mentorship in AI, Robotics, Drones, Electronics, IoT, and Embedded Systems. Build your future today.">
+    <meta name="keywords" content="STEM, AI, Robotics, Drones, IoT, Electronics, Mentorship, Arduino, ESP32, Programming, Education">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Canvas Background for STEM Nodes & Particles -->
+    <canvas id="stem-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="navbar" id="main-header">
+        <div class="nav-container">
+            <a href="#" class="nav-brand" id="brand-logo" onclick="navigateTo('home')">
+                <img src="assets/logo.jpg" alt="BuildVerse Logo" class="brand-logo-img">
+                <span class="brand-name">BUILD<span class="gradient-text">VERSE</span></span>
+            </a>
+
+            <!-- Hamburger Button for Mobile -->
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">
+                <svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24">
+                    <line x1="4" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                    <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                    <line x1="4" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                </svg>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu" id="nav-menu-links">
+                <a href="#" class="nav-link active" data-page="home" onclick="navigateTo('home')">Home</a>
+                <a href="#" class="nav-link" data-page="workshop" onclick="navigateTo('workshop')">Free Workshop</a>
+                <a href="#" class="nav-link" data-page="membership" onclick="navigateTo('membership')">Membership</a>
+                
+                <!-- Explore Dropdown -->
+                <div class="nav-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="explore-dropdown-btn">
+                        Explore 
+                        <svg class="chevron-icon" viewBox="0 0 24 24" width="16" height="16">
+                            <polyline points="6 9 12 15 18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#" data-page="components" onclick="navigateTo('components')">Component Universe</a>
+                        <a href="#" data-page="projects" onclick="navigateTo('projects')">Project Database</a>
+                        <a href="#" data-page="portfolio" onclick="navigateTo('portfolio')">Workshop Portfolio</a>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-link" data-page="community" onclick="navigateTo('community')">Community</a>
+                <a href="#" class="nav-link" data-page="contact" onclick="navigateTo('contact')">Contact</a>
+            </nav>
+
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <div class="nav-dropdown select-dashboard-dropdown">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" id="dashboard-dropdown-btn">
+                        Dashboards
+                        <svg class="chevron-icon" viewBox="0 0 24 24" width="14" height="14">
+                            <polyline points="6 9 12 15 18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                        </svg>
+                    </button>
+                    <div class="dropdown-content align-right">
+                        <a href="#" data-dashboard="student" onclick="navigateToDashboard('student')">Student Dashboard</a>
+                        <a href="#" data-dashboard="parent" onclick="navigateToDashboard('parent')">Parent Dashboard</a>
+                        <a href="#" data-dashboard="mentor" onclick="navigateToDashboard('mentor')">Mentor Dashboard</a>
+                        <a href="#" data-dashboard="admin" onclick="navigateToDashboard('admin')">Admin Dashboard</a>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-sm btn-glow" onclick="navigateTo('workshop')">Join Free Workshop</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Fullscreen Overlay Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-header">
+            <a href="#" class="nav-brand" onclick="navigateTo('home')">
+                <img src="assets/logo.jpg" alt="BuildVerse Logo" class="brand-logo-img">
+                <span class="brand-name">BUILD<span class="gradient-text">VERSE</span></span>
+            </a>
+            <button class="menu-close-btn" id="mobile-menu-close" aria-label="Close Navigation Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#" class="mobile-nav-link" data-page="home" onclick="navigateTo('home')">Home</a>
+            <a href="#" class="mobile-nav-link" data-page="workshop" onclick="navigateTo('workshop')">Free ESP8266 Workshop</a>
+            <a href="#" class="mobile-nav-link" data-page="membership" onclick="navigateTo('membership')">Membership Plans</a>
+            <div class="mobile-submenu-title">Explore Universe</div>
+            <a href="#" class="mobile-nav-link indent" data-page="components" onclick="navigateTo('components')">Component Universe</a>
+            <a href="#" class="mobile-nav-link indent" data-page="projects" onclick="navigateTo('projects')">Project Database</a>
+            <a href="#" class="mobile-nav-link indent" data-page="portfolio" onclick="navigateTo('portfolio')">Workshop Portfolio</a>
+            <div class="mobile-submenu-title">Connect</div>
+            <a href="#" class="mobile-nav-link" data-page="community" onclick="navigateTo('community')">Community</a>
+            <a href="#" class="mobile-nav-link" data-page="contact" onclick="navigateTo('contact')">Contact Us</a>
+            <div class="mobile-submenu-title">Dashboards</div>
+            <div class="mobile-dashboard-grid">
+                <a href="#" onclick="navigateToDashboard('student')">Student</a>
+                <a href="#" onclick="navigateToDashboard('parent')">Parent</a>
+                <a href="#" onclick="navigateToDashboard('mentor')">Mentor</a>
+                <a href="#" onclick="navigateToDashboard('admin')">Admin</a>
+            </div>
+            <button class="btn btn-primary btn-glow" style="margin-top: 2rem; width: 100%;" onclick="navigateTo('workshop')">Reserve Workshop Seat</button>
+        </div>
+    </div>
+
+    <!-- MAIN APP CONTENT PANELS -->
+    <main class="main-content" id="app-main-content">
+
+        <!-- ================= HOME VIEW ================= -->
+        <section id="home-view" class="view-panel active">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="container hero-grid">
+                    <div class="hero-text-content">
+                        <div class="badge-new-launch">
+                            <span class="pulse-dot"></span> Next-Gen STEM Learning
+                        </div>
+                        <h1 class="hero-title">
+                            Build.<br>Compete.<br><span class="gradient-text">Innovate.</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Live mentorship in AI, Robotics, Drones, Electronics, IoT and Future Technologies for ages 10-18.
+                        </p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary btn-lg btn-glow" onclick="navigateTo('workshop')">Join Free ESP8266 Workshop</button>
+                            <button class="btn btn-secondary btn-lg" onclick="navigateTo('membership')">Explore Membership Plans</button>
+                        </div>
+                        <div class="hero-trust">
+                            <div class="trust-avatars">
+                                <span class="avatar">👨‍💻</span>
+                                <span class="avatar">👩‍🔬</span>
+                                <span class="avatar">🤖</span>
+                                <span class="avatar">🛸</span>
+                            </div>
+                            <p class="trust-text"><strong>5 students max</strong> per mentor • 100% project-based</p>
+                        </div>
+                    </div>
+                    <div class="hero-visual-content">
+                        <div class="hero-image-wrapper">
+                            <!-- Infinite horizontal image showcase (built by initHeroShowcase in app.js) -->
+                            <div class="hero-showcase animated-logo-float" id="hero-showcase">
+                                <div class="showcase-track" id="showcase-track"></div>
+                                <noscript>
+                                    <img src="assets/hero-showcase-1.svg" alt="BuildVerse Student Projects" class="showcase-noscript-fallback">
+                                </noscript>
+                            </div>
+                            <!-- Overlay elements giving neon glowing borders -->
+                            <div class="glow-ring neon-cyan"></div>
+                            <div class="glow-ring neon-green"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="stats-section">
+                <div class="container stats-grid">
+                    <div class="stat-card glass-card">
+                        <div class="stat-number gradient-text" id="stat-students">350+</div>
+                        <div class="stat-label">Students Mentored</div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-number gradient-text" id="stat-projects">150+</div>
+                        <div class="stat-label">Projects Built</div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-number gradient-text" id="stat-competitions">2+</div>
+                        <div class="stat-label">Competitions Finished</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technologies Section -->
+            <div class="tech-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <h2 class="section-title">Cutting-Edge Curriculum</h2>
+                        <p class="section-subtitle">Real skills. Hard projects. Hands-on hardware.</p>
+                    </div>
+                    <div class="tech-grid">
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">🧠</div>
+                            <h3 class="tech-card-title">Artificial Intelligence</h3>
+                            <p class="tech-card-desc">Build local neural networks, train image classifiers, and leverage LLM APIs.</p>
+                            <span class="tech-link" onclick="navigateTo('components')">Explore components &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">📊</div>
+                            <h3 class="tech-card-title">Machine Learning</h3>
+                            <p class="tech-card-desc">Train models using python, analyze real-world datasets, and run regressions.</p>
+                            <span class="tech-link" onclick="navigateTo('components')">Explore components &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">🤖</div>
+                            <h3 class="tech-card-title">Robotics</h3>
+                            <p class="tech-card-desc">Assemble multi-joint arms, design mechanical chassis, and program autonomous rovers.</p>
+                            <span class="tech-link" onclick="navigateTo('projects')">View projects &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">🛸</div>
+                            <h3 class="tech-card-title">Drones</h3>
+                            <p class="tech-card-desc">Understand aerodynamics, configure flight controllers, and program telemetry path plotting.</p>
+                            <span class="tech-link" onclick="navigateTo('projects')">View projects &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">🔌</div>
+                            <h3 class="tech-card-title">Electronics</h3>
+                            <p class="tech-card-desc">Breadboard basic analog circuits, soldering custom layouts, and measuring with multimeters.</p>
+                            <span class="tech-link" onclick="navigateTo('components')">Explore components &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">🌐</div>
+                            <h3 class="tech-card-title">IoT (Internet of Things)</h3>
+                            <p class="tech-card-desc">Publish MQTT sensor streams, interface REST APIs, and command relays over remote web apps.</p>
+                            <span class="tech-link" onclick="navigateTo('projects')">View projects &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">📟</div>
+                            <h3 class="tech-card-title">Embedded Systems</h3>
+                            <p class="tech-card-desc">Write highly efficient firmware for microcontrollers (C/C++ and MicroPython).</p>
+                            <span class="tech-link" onclick="navigateTo('components')">Explore components &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">💻</div>
+                            <h3 class="tech-card-title">Programming</h3>
+                            <p class="tech-card-desc">Master Python, C++, HTML/JS, and develop solid foundations in logic and structures.</p>
+                            <span class="tech-link" onclick="navigateTo('components')">Explore components &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">👁️</div>
+                            <h3 class="tech-card-title">Computer Vision</h3>
+                            <p class="tech-card-desc">Implement OpenCV for object tracking, facial detection, and barcode reading.</p>
+                            <span class="tech-link" onclick="navigateTo('projects')">View projects &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">🖨️</div>
+                            <h3 class="tech-card-title">3D Printing</h3>
+                            <p class="tech-card-desc">Scribble CAD blueprints in TinkerCAD/Fusion360, configure slicers, and print structures.</p>
+                            <span class="tech-link" onclick="navigateTo('components')">Explore components &rarr;</span>
+                        </div>
+                        <div class="tech-card glass-card">
+                            <div class="tech-icon font-emoji">💼</div>
+                            <h3 class="tech-card-title">Entrepreneurship</h3>
+                            <p class="tech-card-desc">Pitching prototypes, calculating unit economics, and drafting MVP slide decks.</p>
+                            <span class="tech-link" onclick="navigateTo('projects')">View projects &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Proposition (Why Parents Trust BuildVerse) -->
+            <div class="value-prop-section">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <h2 class="section-title">The BuildVerse Mentorship Standard</h2>
+                        <p class="section-subtitle">A premium learning experience designed to build confidence, portfolios, and real-world skills.</p>
+                    </div>
+                    <div class="value-prop-grid">
+                        <div class="value-prop-card glass-card">
+                            <div class="value-prop-icon">🔴</div>
+                            <h3>Live sessions only, no pre-recorded videos</h3>
+                            <p>We don't sell boring video libraries. Real mentors teach in real-time, holding students accountable and solving roadblocks immediately.</p>
+                        </div>
+                        <div class="value-prop-card glass-card">
+                            <div class="value-prop-icon">👥</div>
+                            <h3>Max 5 students per cohort</h3>
+                            <p>Ultra-small class sizes ensure your child receives undivided attention, individual mentoring, and tailored learning speed.</p>
+                        </div>
+                        <div class="value-prop-card glass-card">
+                            <div class="value-prop-icon">🛠️</div>
+                            <h3>Project reviews & code audits</h3>
+                            <p>Mentors examine code repositories and circuitry. Students learn standard hardware development practices used by engineering squads.</p>
+                        </div>
+                        <div class="value-prop-card glass-card">
+                            <div class="value-prop-icon">💼</div>
+                            <h3>Portfolio Building</h3>
+                            <p>Every student graduates with a published portfolio website showing off their functional AI models, drone systems, and IoT nodes.</p>
+                        </div>
+                        <div class="value-prop-card glass-card">
+                            <div class="value-prop-icon">📱</div>
+                            <h3>Parents stay informed</h3>
+                            <p>Get bi-weekly progress reports, attendance trackers, and direct communication channels inside the Parents Dashboard.</p>
+                        </div>
+                        <!-- <div class="value-prop-card glass-card">
+                            <div class="value-prop-icon">🏆</div>
+                            <h3>Gamified Competitions</h3>
+                            <p>Students compete in leagues, earning XP and climbing school leaderboards, making regular technical work highly addictive.</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Callout Block -->
+            <div class="cta-banner-section container">
+                <div class="cta-banner glass-card neon-glow-border">
+                    <div class="cta-banner-text">
+                        <h2>Start free, then build something real.</h2>
+                        <p>Join the next ESP8266 Innovation Workshop and experience our live mentorship platform first-hand.</p>
+                    </div>
+                    <div class="cta-banner-actions">
+                        <button class="btn btn-primary btn-glow" onclick="navigateTo('workshop')">Register Free Workshop</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('membership')">View Memberships</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= FREE EVENT VIEW ================= -->
+        <section id="workshop-view" class="view-panel">
+            <div class="container page-content">
+                <div class="workshop-layout-grid">
+                    <!-- Left: Details & Form -->
+                    <div class="workshop-details-col">
+                        <span class="badge-alert">🔥 100% Free - Hardware kits provided</span>
+                        <h1 class="page-title" id="workshop-page-title">Free ESP8266 Innovation Workshop</h1>
+                        <p class="workshop-tagline" id="workshop-page-description">
+                            Build your first IoT project using ESP8266 and enter the world of AI, Robotics, Drones and Automation.
+                        </p>
+
+                        <!-- Countdown Timer Widget -->
+                        <div class="countdown-widget glass-card">
+                            <div class="countdown-title">WORKSHOP STARTS IN</div>
+                            <div class="timer-display" id="workshop-timer">
+                                <div class="timer-segment">
+                                    <span class="timer-val" id="timer-days">14</span>
+                                    <span class="timer-lbl">DAYS</span>
+                                </div>
+                                <div class="timer-colon">:</div>
+                                <div class="timer-segment">
+                                    <span class="timer-val" id="timer-hours">00</span>
+                                    <span class="timer-lbl">HOURS</span>
+                                </div>
+                                <div class="timer-colon">:</div>
+                                <div class="timer-segment">
+                                    <span class="timer-val" id="timer-minutes">50</span>
+                                    <span class="timer-lbl">MINUTES</span>
+                                </div>
+                                <div class="timer-colon">:</div>
+                                <div class="timer-segment">
+                                    <span class="timer-val" id="timer-seconds">03</span>
+                                    <span class="timer-lbl">SECONDS</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- What students will learn checklist -->
+                        <div class="workshop-curriculum-container">
+                            <h2 class="sub-heading">Workshop Curriculum</h2>
+                            <div class="curriculum-steps">
+                                <div class="curriculum-step glass-card">
+                                    <span class="step-num">S1</span>
+                                    <div>
+                                        <h4>Session 1: Introduction to IoT and ESP8266</h4>
+                                        <p>Learn what IoT is, get an overview of ESP8266 & GPIO pins, configure Arduino IDE & Wokwi, and compile an LED Blink simulation.</p>
+                                    </div>
+                                </div>
+                                <div class="curriculum-step glass-card">
+                                    <span class="step-num">S2</span>
+                                    <div>
+                                        <h4>Session 2: Digital Inputs and Outputs</h4>
+                                        <p>Program push buttons & LEDs, implement software debouncing, and build a Smart Traffic Signal project.</p>
+                                    </div>
+                                </div>
+                                <div class="curriculum-step glass-card">
+                                    <span class="step-num">S3</span>
+                                    <div>
+                                        <h4>Session 3: Sensors and Data Collection</h4>
+                                        <p>Interface DHT11 (temperature/humidity), LDR (light sensor), and Ultrasonic sensors to process analog/digital inputs in a Weather Station project.</p>
+                                    </div>
+                                </div>
+                                <div class="curriculum-step glass-card">
+                                    <span class="step-num">S4</span>
+                                    <div>
+                                        <h4>Session 4: WiFi and Cloud Communication</h4>
+                                        <p>Establish WiFi connections, perform HTTP requests, fetch REST APIs, and build a remote IoT Temperature Monitor.</p>
+                                    </div>
+                                </div>
+                                <div class="curriculum-step glass-card">
+                                    <span class="step-num">S5</span>
+                                    <div>
+                                        <h4>Session 5: Final Project Day</h4>
+                                        <p>Present active project submissions (Smart Plant Monitor, Smart Room Monitor, or IoT Weather Station), announce giveaways, and join the community.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Giveaway and Certificate Grid -->
+                        <div class="workshop-benefits-grid">
+                            <div class="benefit-box glass-card" style="grid-column: span 2; text-align: center;">
+                                <div class="benefit-icon">🎁</div>
+                                <h3>Workshop Giveaways</h3>
+                                <p>Active students stand a chance to win 1 of 5 ESP8266 starter kits, breadboards, jumper wires, and sensory packages.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Registration Form Column -->
+                    <div class="workshop-form-col">
+                        <div class="registration-form-card glass-card neon-glow-border" id="registration-card-wrapper">
+                            <div class="form-header">
+                                <h3>Reserve Your Seat</h3>
+                                <p>Seats are strictly capped at 150 to maintain a 1:5 mentor ratio.</p>
+                                
+                                <div class="seats-counter-widget">
+                                    <div class="seats-progress-bar">
+                                        <div class="seats-filled-progress" id="seats-progress" style="width: 60%;"></div>
+                                    </div>
+                                    <div class="seats-labels">
+                                        <span id="seats-taken">90 of 150 seats filled</span>
+                                        <span class="badge-status">Fast filling</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form id="workshop-registration-form" onsubmit="handleRegistrationSubmit(event)">
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="student-name">Student Name *</label>
+                                        <input type="text" id="student-name" required placeholder="e.g., Aarav Sharma">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="parent-name">Parent Name *</label>
+                                        <input type="text" id="parent-name" required placeholder="e.g., Priya Sharma">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="mobile-num">Mobile Number *</label>
+                                        <input type="tel" id="mobile-num" required placeholder="e.g., +91 98765 43210">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="whatsapp-num">WhatsApp Number *</label>
+                                        <input type="tel" id="whatsapp-num" required placeholder="e.g., +91 98765 43210">
+                                    </div>
+                                </div>
+
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="student-email">Email Address *</label>
+                                        <input type="email" id="student-email" required placeholder="e.g., parent@email.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="student-grade">Grade *</label>
+                                        <select id="student-grade" required>
+                                            <option value="">Select Grade</option>
+                                            <option value="6">Grade 6 (Age 10-11)</option>
+                                            <option value="7">Grade 7 (Age 11-12)</option>
+                                            <option value="8">Grade 8 (Age 12-13)</option>
+                                            <option value="9">Grade 9 (Age 13-14)</option>
+                                            <option value="10">Grade 10 (Age 14-15)</option>
+                                            <option value="11">Grade 11 (Age 15-16)</option>
+                                            <option value="12">Grade 12 (Age 16-18)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="school-name">School Name *</label>
+                                        <input type="text" id="school-name" required placeholder="e.g., Delhi Public School">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city-name">City *</label>
+                                        <input type="text" id="city-name" required placeholder="e.g., Bengaluru">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="prev-exp">Previous Coding/Electronics Experience (Optional)</label>
+                                    <select id="prev-exp">
+                                        <option value="none">Beginner - Never coded/assembled hardware</option>
+                                        <option value="scratch">Familiar with Scratch/block programming</option>
+                                        <option value="python-basics">Familiar with text languages (Python, C++)</option>
+                                        <option value="arduino-esp">Have built projects on Arduino or ESP32 before</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Technologies they are interested in (Select multiple)</label>
+                                    <div class="checkbox-pill-grid">
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="ai"> AI</label>
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="ml"> Machine Learning</label>
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="robotics"> Robotics</label>
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="drones"> Drones</label>
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="iot" checked> IoT</label>
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="embedded"> Microcontrollers</label>
+                                        <label class="check-pill"><input type="checkbox" name="interest" value="printing"> 3D Printing</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block btn-glow">Reserve My Free Seat</button>
+                                <p class="form-disclosure">No payment required. Seats are confirmed on a first-come, first-served basis.</p>
+                            </form>
+                        </div>
+
+                        <!-- Success view (Hidden by default, shown on successful submission) -->
+                        <div class="registration-success-card glass-card hidden" id="registration-success-wrapper">
+                            <div class="success-icon-animation">✔️</div>
+                            <h2>Seat Reserved Successfully!</h2>
+                            <p class="success-desc">We have sent a confirmation email & SMS with setup instructions. Your digital workshop pass is generated below.</p>
+                            
+                            <!-- Digital Ticket -->
+                            <div class="digital-ticket">
+                                <div class="ticket-header">
+                                    <img src="assets/logo.jpg" alt="Logo" class="ticket-logo">
+                                    <div>
+                                        <span class="ticket-brand">BUILDVERSE</span>
+                                        <span class="ticket-title">OFFICIAL WORKSHOP PASS</span>
+                                    </div>
+                                </div>
+                                <div class="ticket-body">
+                                    <div class="ticket-info">
+                                        <div class="ticket-field">
+                                            <span class="ticket-label">STUDENT</span>
+                                            <span class="ticket-value" id="ticket-val-student">Aarav Sharma</span>
+                                        </div>
+                                        <div class="ticket-field">
+                                            <span class="ticket-label">GRADE</span>
+                                            <span class="ticket-value" id="ticket-val-grade">Grade 8</span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-info">
+                                        <div class="ticket-field">
+                                            <span class="ticket-label">SCHOOL</span>
+                                            <span class="ticket-value" id="ticket-val-school">Delhi Public School</span>
+                                        </div>
+                                        <div class="ticket-field">
+                                            <span class="ticket-label">CITY</span>
+                                            <span class="ticket-value" id="ticket-val-city">Bengaluru</span>
+                                        </div>
+                                    </div>
+                                    <div class="ticket-footer-row">
+                                        <div class="ticket-field">
+                                            <span class="ticket-label">CONFIRMATION ID</span>
+                                            <span class="ticket-value ticket-id" id="ticket-val-id">BV-ESP32-8409</span>
+                                        </div>
+                                        <div class="ticket-barcode">|||| | | ||| |||| | ||</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="success-actions">
+                                <a href="https://wa.me/919000000000" target="_blank" class="btn btn-success btn-block">
+                                    💬 Join Workshop WhatsApp Group
+                                </a>
+                                <button class="btn btn-secondary btn-block" onclick="resetRegistrationForm()">
+                                    Register Another Student
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= MEMBERSHIP VIEW ================= -->
+        <section id="membership-view" class="view-panel">
+            <div class="container page-content">
+                <div class="section-header text-center">
+                    <h1 class="page-title">BuildVerse Membership Plans</h1>
+                    <p class="section-subtitle">Invest in your child's technical future. No contracts. Cancel anytime.</p>
+                    
+                    <!-- Billing Toggle -->
+                    <div class="billing-toggle-container">
+                        <span class="billing-label active" id="billing-monthly">Monthly Billing</span>
+                        <label class="switch">
+                            <input type="checkbox" id="billing-cycle-switch" onchange="toggleBillingCycle()">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="billing-label" id="billing-annual">Annual Billing <span class="discount-badge">Save 20%</span></span>
+                    </div>
+                </div>
+
+                <!-- Pricing Cards Grid -->
+                <div class="pricing-grid">
+                    <!-- Card 1: Explorer -->
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <span class="plan-level">EXPLORER</span>
+                            <div class="plan-price-wrapper">
+                                <span class="currency">₹</span>
+                                <span class="price-val" id="price-explorer">999</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p class="plan-desc">For students looking to build their first few physical prototypes and explore basic coding.</p>
+                        </div>
+                        <hr class="pricing-divider">
+                        <div class="pricing-body">
+                            <ul class="plan-benefits">
+                                <li>✨ 2 Live mentored sessions/week</li>
+                                <li>✨ Maximum 5 students per class</li>
+                                <li>✨ Hardware simulation & basic circuits</li>
+                                <li>✨ Active community channels access</li>
+                                <li>✨ Digital certificate of achievements</li>
+                                <li class="disabled">❌ 1-on-1 monthly check-ins</li>
+                                <li class="disabled">❌ Competition entry passes</li>
+                                <li class="disabled">❌ Advanced hardware kit shipping</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-secondary btn-block" onclick="selectMembership('Explorer')">Subscribe Explorer</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Innovator (Popular) -->
+                    <div class="pricing-card glass-card popular-card">
+                        <div class="popular-tag">MOST POPULAR</div>
+                        <div class="pricing-header">
+                            <span class="plan-level">INNOVATOR</span>
+                            <div class="plan-price-wrapper">
+                                <span class="currency">₹</span>
+                                <span class="price-val" id="price-innovator">1,999</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p class="plan-desc">Perfect for students wanting deeper projects, custom sensor grids, and local coding platforms.</p>
+                        </div>
+                        <hr class="pricing-divider">
+                        <div class="pricing-body">
+                            <ul class="plan-benefits">
+                                <li>✨ 3 Live mentored sessions/week</li>
+                                <li>✨ Maximum 5 students per class</li>
+                                <li>✨ 1-on-1 monthly check-in with lead mentor</li>
+                                <li>✨ Custom project reviews & code auditing</li>
+                                <li>✨ 1 Free entry to Monthly Leagues</li>
+                                <li>✨ Complete sensors package shipped</li>
+                                <li>✨ Professional portfolio website hosting</li>
+                                <li class="disabled">❌ Advanced micro-controllers support</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-primary btn-block btn-glow" onclick="selectMembership('Innovator')">Subscribe Innovator</button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Builder Pro -->
+                    <div class="pricing-card glass-card">
+                        <div class="pricing-header">
+                            <span class="plan-level">BUILDER PRO</span>
+                            <div class="plan-price-wrapper">
+                                <span class="currency">₹</span>
+                                <span class="price-val" id="price-builder">3,499</span>
+                                <span class="period">/month</span>
+                            </div>
+                            <p class="plan-desc">For advanced students aiming to compete globally, build complex robotics, and write neural nets.</p>
+                        </div>
+                        <hr class="pricing-divider">
+                        <div class="pricing-body">
+                            <ul class="plan-benefits">
+                                <li>✨ Daily live mentor office hours</li>
+                                <li>✨ Maximum 3 students per class</li>
+                                <li>✨ Unlimited project reviews & audits</li>
+                                <li>✨ Bi-weekly 1-on-1 career & portfolio strategy</li>
+                                <li>✨ Free access to all global competitions</li>
+                                <li>✨ High-end hardware kit shipped (ESP32, motors, sensors)</li>
+                                <li>✨ Custom domain portfolio website</li>
+                                <li>✨ Direct messaging to mentors 24/7</li>
+                            </ul>
+                        </div>
+                        <div class="pricing-footer">
+                            <button class="btn btn-secondary btn-block" onclick="selectMembership('Builder Pro')">Subscribe Builder Pro</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parents Trust FAQ Section -->
+                <div class="pricing-faq container">
+                    <h2 class="sub-heading text-center">Frequently Answered Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-item glass-card">
+                            <h4 id="faq-dynamic-q1">Do we need to purchase hardware separately?</h4>
+                            <p id="faq-dynamic-a1">For the Free Workshop, we use interactive digital web simulators so no hardware purchase is required. For monthly memberships, required components packages (like sensors, boards) are shipped directly to your house based on the enrolled plan tier.</p>
+                        </div>
+                        <div class="faq-item glass-card">
+                            <h4 id="faq-dynamic-q2">Who are the mentors?</h4>
+                            <p id="faq-dynamic-a2">Our mentors are experienced engineers, computer scientists, and researchers from elite institutes (IITs, NITs) who love tutoring young minds. All mentors undergo thorough background and security checks.</p>
+                        </div>
+                        <div class="faq-item glass-card">
+                            <h4>What if my child misses a session?</h4>
+                            <p>Because classes are limited to 5 students, scheduling is flexible. If a student misses a session, they can easily join a reschedule makeup class in the student portal, or attend open office hours to catch up.</p>
+                        </div>
+                        <div class="faq-item glass-card">
+                            <h4>Is there any lock-in contract?</h4>
+                            <p>No. BuildVerse works on a month-to-month subscription basis. You can upgrade, downgrade, or cancel the subscription at any time via the Parent Dashboard with a single click.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= COMPETITION ARENA VIEW ================= -->
+        <section id="competition-view" class="view-panel">
+            <div class="container page-content">
+                <div class="competition-layout-grid">
+                    <!-- Left main arena panel -->
+                    <div class="competition-main-col">
+                        <h1 class="page-title">Competition Arena</h1>
+                        <p class="page-desc">Compete with student innovators globally, build actual working prototypes, score XP, and win grand cash prizes.</p>
+
+                        <!-- Sub-Navigation tabs -->
+                        <div class="tab-menu glass-card">
+                            <button class="tab-btn active" data-comp-tab="active" onclick="switchCompTab('active')">Active Leagues</button>
+                            <button class="tab-btn" data-comp-tab="upcoming" onclick="switchCompTab('upcoming')">Upcoming Events</button>
+                            <button class="tab-btn" data-comp-tab="leaderboard" onclick="switchCompTab('leaderboard')">Leaderboard</button>
+                            <button class="tab-btn" data-comp-tab="rankings" onclick="switchCompTab('rankings')">School Rankings</button>
+                        </div>
+
+                        <!-- TAB CONTENT: ACTIVE LEAGUES -->
+                        <div class="comp-tab-panel active" id="comp-tab-active">
+                            <div class="competitions-grid">
+                                <div class="comp-card glass-card">
+                                    <div class="comp-badge status-live">LIVE NOW</div>
+                                    <h3 class="comp-title">AI Vision Challenge</h3>
+                                    <p class="comp-desc">Deploy an OpenCV edge model on a Raspberry Pi or computer to recognize, categorize, and sort 5 different physical items in real-time.</p>
+                                    <div class="comp-meta">
+                                        <div>🏆 <strong>₹25,000 Prize Pool</strong></div>
+                                        <div>⏳ <strong>Ends in 6 days</strong></div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm btn-block btn-glow" onclick="joinCompetition('AI Vision Challenge')">Enter Challenge</button>
+                                </div>
+
+                                <div class="comp-card glass-card">
+                                    <div class="comp-badge status-live">LIVE NOW</div>
+                                    <h3 class="comp-title">IoT Innovation Cup</h3>
+                                    <p class="comp-desc">Connect multiple sensors to an ESP32, stream telemetry via MQTT protocols, and render a web dashboard showing ambient parameters.</p>
+                                    <div class="comp-meta">
+                                        <div>🏆 <strong>₹15,000 Prize Pool</strong></div>
+                                        <div>⏳ <strong>Ends in 12 days</strong></div>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm btn-block btn-glow" onclick="joinCompetition('IoT Innovation Cup')">Enter Challenge</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB CONTENT: UPCOMING LEAGUES -->
+                        <div class="comp-tab-panel" id="comp-tab-upcoming">
+                            <div class="competitions-grid">
+                                <div class="comp-card glass-card">
+                                    <div class="comp-badge status-upcoming">STARTS JULY 15</div>
+                                    <h3 class="comp-title">Drone Aerodynamics League</h3>
+                                    <p class="comp-desc">Program autonomous path coordinates for hexacopters to dodge digital circular gates in a physics-based flight simulator.</p>
+                                    <div class="comp-meta">
+                                        <div>🏆 <strong>₹30,000 Prize Pool</strong></div>
+                                        <div>🎟️ <strong>Explorer passes valid</strong></div>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm btn-block" onclick="registerUpcomingComp('Drone Aerodynamics League')">Pre-register</button>
+                                </div>
+
+                                <div class="comp-card glass-card">
+                                    <div class="comp-badge status-upcoming">STARTS AUG 01</div>
+                                    <h3 class="comp-title">Robotics Obstacle Cup</h3>
+                                    <p class="comp-desc">Design custom PID motor control scripts to navigate differential drive rovers out of randomized complex mazes.</p>
+                                    <div class="comp-meta">
+                                        <div>🏆 <strong>₹50,000 Prize Pool</strong></div>
+                                        <div>🎟️ <strong>Innovator passes valid</strong></div>
+                                    </div>
+                                    <button class="btn btn-secondary btn-sm btn-block" onclick="registerUpcomingComp('Robotics Obstacle Cup')">Pre-register</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB CONTENT: LEADERBOARD -->
+                        <div class="comp-tab-panel" id="comp-tab-leaderboard">
+                            <div class="table-wrapper glass-card">
+                                <table class="leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Student</th>
+                                            <th>City</th>
+                                            <th>Level</th>
+                                            <th>Total XP</th>
+                                            <th>Badges</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="rank-1">
+                                            <td>🥇 1</td>
+                                            <td>Aman Malhotra</td>
+                                            <td>Mumbai</td>
+                                            <td>Level 24</td>
+                                            <td>14,820 XP</td>
+                                            <td>🔥 🎖️ 🛡️</td>
+                                        </tr>
+                                        <tr class="rank-2">
+                                            <td>🥈 2</td>
+                                            <td>Rohan Murthy</td>
+                                            <td>Bengaluru</td>
+                                            <td>Level 22</td>
+                                            <td>13,400 XP</td>
+                                            <td>⚡ 🤖 🛰️</td>
+                                        </tr>
+                                        <tr class="rank-3">
+                                            <td>🥉 3</td>
+                                            <td>Sara Sen</td>
+                                            <td>Kolkata</td>
+                                            <td>Level 21</td>
+                                            <td>12,950 XP</td>
+                                            <td>🎖️ 👾 💻</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Kavya Das</td>
+                                            <td>New Delhi</td>
+                                            <td>Level 19</td>
+                                            <td>11,100 XP</td>
+                                            <td>🔥 🔌</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Kabir Bose</td>
+                                            <td>Pune</td>
+                                            <td>Level 18</td>
+                                            <td>10,500 XP</td>
+                                            <td>🛡️ 🛰️</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- TAB CONTENT: SCHOOL RANKINGS -->
+                        <div class="comp-tab-panel" id="comp-tab-rankings">
+                            <div class="table-wrapper glass-card">
+                                <table class="leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>School Name</th>
+                                            <th>City</th>
+                                            <th>Students Enrolled</th>
+                                            <th>Points Gained</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>🥇 1</td>
+                                            <td>Delhi Public School (DPS)</td>
+                                            <td>Bengaluru</td>
+                                            <td>140 students</td>
+                                            <td>84,500 pts</td>
+                                        </tr>
+                                        <tr>
+                                            <td>🥈 2</td>
+                                            <td>The Heritage School</td>
+                                            <td>Kolkata</td>
+                                            <td>92 students</td>
+                                            <td>61,200 pts</td>
+                                        </tr>
+                                        <tr>
+                                            <td>🥉 3</td>
+                                            <td>Dhirubhai Ambani Intl School</td>
+                                            <td>Mumbai</td>
+                                            <td>75 students</td>
+                                            <td>58,900 pts</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Bishop Cotton Boys' School</td>
+                                            <td>Bengaluru</td>
+                                            <td>88 students</td>
+                                            <td>47,400 pts</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Don Bosco High School</td>
+                                            <td>Pune</td>
+                                            <td>64 students</td>
+                                            <td>39,800 pts</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right gamification widget panel -->
+                    <div class="competition-sidebar-col">
+                        <div class="gamification-status-card glass-card">
+                            <h3>My Arena Stats</h3>
+                            <div class="stats-user-header">
+                                <span class="user-avatar-placeholder">🧒</span>
+                                <div>
+                                    <div class="user-name">Aarav Sharma (You)</div>
+                                    <div class="user-rank">Rank: #142 Global</div>
+                                </div>
+                            </div>
+                            
+                            <hr class="card-divider">
+
+                            <!-- Level Tracker -->
+                            <div class="xp-progress-container">
+                                <div class="xp-labels">
+                                    <span>Level 12</span>
+                                    <span>Level 13</span>
+                                </div>
+                                <div class="xp-progress-bar">
+                                    <div class="xp-progress-filled" style="width: 70%;"></div>
+                                </div>
+                                <div class="xp-details">
+                                    <span>700 / 1000 XP to Level Up</span>
+                                </div>
+                            </div>
+
+                            <!-- Currency Tracker -->
+                            <div class="currency-row">
+                                <div class="currency-box">
+                                    <span class="currency-emoji">🪙</span>
+                                    <div>
+                                        <div class="currency-val">340</div>
+                                        <div class="currency-lbl">BuildCoins</div>
+                                    </div>
+                                </div>
+                                <div class="currency-box">
+                                    <span class="currency-emoji">🔥</span>
+                                    <div>
+                                        <div class="currency-val">5 Days</div>
+                                        <div class="currency-lbl">Daily Streak</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-secondary btn-sm btn-block" onclick="claimDailyXP()">Claim Daily Reward (+50 XP)</button>
+                            
+                            <hr class="card-divider">
+
+                            <!-- Badges Section -->
+                            <h4 class="sidebar-sub-heading">My Badges</h4>
+                            <div class="badges-row">
+                                <div class="badge-icon-item" title="Arduino Starter - Completed first micro-controller course">
+                                    🔌
+                                    <span class="tooltip">Arduino Starter</span>
+                                </div>
+                                <div class="badge-icon-item" title="IoT Connect - Interfaced Wifi module successfully">
+                                    📶
+                                    <span class="tooltip">IoT Connect</span>
+                                </div>
+                                <div class="badge-icon-item" title="Project Builder - Completed 5 projects">
+                                    🛠️
+                                    <span class="tooltip">Project Builder</span>
+                                </div>
+                                <div class="badge-icon-item locked" title="Locked: AI Wizard - Deploy deep computer vision models">
+                                    🧠
+                                    <span class="tooltip">Locked: AI Wizard</span>
+                                </div>
+                                <div class="badge-icon-item locked" title="Locked: Sky Master - Build a custom drone telemetry program">
+                                    🛸
+                                    <span class="tooltip">Locked: Sky Master</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= COMPONENT UNIVERSE VIEW ================= -->
+        <section id="components-view" class="view-panel">
+            <div class="container page-content">
+                <div class="section-header">
+                    <h1 class="page-title">Component Universe</h1>
+                    <p class="section-subtitle">Click on any hardware board to view detailed datasheets, pinouts, and tutorial scripts.</p>
+                </div>
+
+                <!-- Filters & Search Toolbar -->
+                <div class="toolbar-container glass-card">
+                    <div class="filter-pills-row">
+                        <button class="pill active" data-cat-filter="all" onclick="filterComponents('all')">All Components</button>
+                        <button class="pill" data-cat-filter="beginner" onclick="filterComponents('beginner')">Beginner (5V)</button>
+                        <button class="pill" data-cat-filter="intermediate" onclick="filterComponents('intermediate')">Intermediate (WiFi / BLE)</button>
+                        <button class="pill" data-cat-filter="advanced" onclick="filterComponents('advanced')">Advanced (SBCs)</button>
+                    </div>
+                    <div class="search-box-wrapper">
+                        <input type="text" id="component-search-input" placeholder="Search components... (e.g. Arduino, ESP32)" onkeyup="searchComponents()">
+                    </div>
+                </div>
+
+                <!-- Components Card Grid -->
+                <div class="components-grid" id="components-grid-container">
+                    <!-- --- BASIC LEVEL BOARDS --- -->
+                    <!-- Arduino Uno -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="arduino uno r3" onclick="openComponentDetails('uno')">
+                        <div class="comp-image-placeholder">🔌</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>Arduino Uno R3</h3>
+                            <p>Best for: Electronics basics. The entry-level standard microcontroller board.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Arduino Nano -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="arduino nano" onclick="openComponentDetails('nano')">
+                        <div class="comp-image-placeholder">🔌</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>Arduino Nano</h3>
+                            <p>Best for: Compact projects. Tiny ATmega328P footprint suitable for breadboards.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Arduino Mega 2560 -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="arduino mega 2560" onclick="openComponentDetails('mega')">
+                        <div class="comp-image-placeholder">🔌</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>Arduino Mega 2560</h3>
+                            <p>Best for: Larger projects with many sensors. Extra GPIO pins and serial channels.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- BBC micro:bit -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="bbc micro:bit" onclick="openComponentDetails('microbit')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>BBC micro:bit</h3>
+                            <p>Best for: School STEM learning. Built-in LED matrix, compass, and BLE radio.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Seeeduino XIAO -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="seeeduino xiao" onclick="openComponentDetails('xiao')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>Seeeduino XIAO</h3>
+                            <p>Best for: Small wearable projects. SAMD21 ARM Cortex-M0+ chip in a finger-sized footprint.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- ATtiny85 -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="attiny85 development board" onclick="openComponentDetails('attiny')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>ATtiny85 Dev Board</h3>
+                            <p>Best for: Tiny embedded projects. Ultra-low cost, ultra-low power 8-pin microcontroller.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Raspberry Pi Pico -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="raspberry pi pico rp2040" onclick="openComponentDetails('pico')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>Raspberry Pi Pico</h3>
+                            <p>Best for: Learning MicroPython and C. Powerful RP2040 dual-core controller.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Raspberry Pi Pico W -->
+                    <div class="comp-grid-card glass-card" data-category="beginner" data-name="raspberry pi pico w wifi" onclick="openComponentDetails('picow')">
+                        <div class="comp-image-placeholder">📶</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag beginner">BEGINNER</span>
+                            <h3>Raspberry Pi Pico W</h3>
+                            <p>Best for: WiFi beginner IoT projects. RP2040 micro-controller with onboard 2.4GHz WiFi/BLE.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- --- INTERMEDIATE LEVEL BOARDS --- -->
+                    <!-- ESP8266 NodeMCU -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="esp8266 nodemcu wifi" onclick="openComponentDetails('esp8266')">
+                        <div class="comp-image-placeholder">📶</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>ESP8266 NodeMCU</h3>
+                            <p>Best for: IoT projects. Connect sensors directly to web databases over local WiFi networks.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- ESP32 DevKit -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="esp32 devkitc bluetooth" onclick="openComponentDetails('esp32')">
+                        <div class="comp-image-placeholder">📡</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>ESP32 DevKit</h3>
+                            <p>Best for: Advanced IoT. Classic Bluetooth, BLE, WiFi and robust dual LX6 cores.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- ESP32-S3 -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="esp32-s3 neural vector" onclick="openComponentDetails('esp32s3')">
+                        <div class="comp-image-placeholder">🧠</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>ESP32-S3</h3>
+                            <p>Best for: AI and computer vision. Features neural network vector instruction extensions.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- ESP32-C3 -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="esp32-c3 riscv" onclick="openComponentDetails('esp32c3')">
+                        <div class="comp-image-placeholder">📡</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>ESP32-C3</h3>
+                            <p>Best for: Low-power IoT. Single-core RISC-V processor architecture supporting WiFi and BLE5.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- STM32 Blue Pill -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="stm32 blue pill" onclick="openComponentDetails('stm32')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>STM32 Blue Pill</h3>
+                            <p>Best for: Embedded systems. High-performance ARM Cortex-M3 core operating at 72 MHz.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- STM32 Black Pill -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="stm32 black pill cortex m4" onclick="openComponentDetails('stm32black')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>STM32 Black Pill</h3>
+                            <p>Best for: Advanced embedded systems. ARM Cortex-M4 with hardware floating point operations unit.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Teensy 4.1 -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="teensy 4.1 high speed" onclick="openComponentDetails('teensy')">
+                        <div class="comp-image-placeholder">⚡</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>Teensy 4.1</h3>
+                            <p>Best for: High-speed control systems. Features ARM Cortex-M7 running at 600 MHz.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Arduino Due -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="arduino due 32-bit sam3x8e" onclick="openComponentDetails('due')">
+                        <div class="comp-image-placeholder">🔌</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>Arduino Due</h3>
+                            <p>Best for: 32-bit Arduino projects. Atmel SAM3X8E ARM Cortex-M3 processor module.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Arduino Nano 33 IoT -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="arduino nano 33 iot" onclick="openComponentDetails('nano33')">
+                        <div class="comp-image-placeholder">📶</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>Arduino Nano 33 IoT</h3>
+                            <p>Best for: Professional IoT. Small format board with SAMD21 processor and secure crypto chip.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- LoPy4 -->
+                    <div class="comp-grid-card glass-card" data-category="intermediate" data-name="lopy4 lora sigfox esp32" onclick="openComponentDetails('lopy4')">
+                        <div class="comp-image-placeholder">📡</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag intermediate">INTERMEDIATE</span>
+                            <h3>LoPy4</h3>
+                            <p>Best for: LoRa and IoT networks. Quad-network micro-python controller (LoRa, Sigfox, WiFi, Bluetooth).</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- --- ADVANCED LEVEL BOARDS --- -->
+                    <!-- Raspberry Pi 5 -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="raspberry pi 5 sbc computer" onclick="openComponentDetails('rpi5')">
+                        <div class="comp-image-placeholder">🖥️</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>Raspberry Pi 5</h3>
+                            <p>Best for: Edge AI and robotics. Quad-core ARM A76 processor running full desktop Linux systems.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Raspberry Pi Compute Module 5 -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="raspberry pi compute module 5 cm5" onclick="openComponentDetails('cm5')">
+                        <div class="comp-image-placeholder">🖥️</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>Raspberry Pi CM5</h3>
+                            <p>Best for: Industrial applications. Small custom board layout containing core Pi 5 CPU elements.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- NVIDIA Jetson Nano -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="nvidia jetson nano gpu AI" onclick="openComponentDetails('jetson')">
+                        <div class="comp-image-placeholder">🧠</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>NVIDIA Jetson Nano</h3>
+                            <p>Best for: AI and computer vision. Features 128 Maxwell GPU cores for local neural nets execution.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- NVIDIA Jetson Orin Nano -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="nvidia jetson orin nano AI edge" onclick="openComponentDetails('orin')">
+                        <div class="comp-image-placeholder">🧠</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>NVIDIA Jetson Orin Nano</h3>
+                            <p>Best for: Autonomous robots. Up to 40 TOPS AI compute power using Ampere GPU architecture.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- BeagleBone Black -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="beaglebone black industrial" onclick="openComponentDetails('beaglebone')">
+                        <div class="comp-image-placeholder">🖥️</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>BeagleBone Black</h3>
+                            <p>Best for: Industrial automation. Dual Programmable Real-Time Units (PRUs) for low latency digital logic.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Pixhawk 6C -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="pixhawk 6c drone autopilot uav" onclick="openComponentDetails('pixhawk6c')">
+                        <div class="comp-image-placeholder">🛸</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>Pixhawk 6C</h3>
+                            <p>Best for: Drones and UAVs. Modular flight controller running PX4 autopilot configurations.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Pixhawk 6X -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="pixhawk 6x professional drone" onclick="openComponentDetails('pixhawk6x')">
+                        <div class="comp-image-placeholder">🛸</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>Pixhawk 6X</h3>
+                            <p>Best for: Professional UAVs. Triply-redundant IMU sensors configuration with hardware dampening structures.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Cube Orange+ -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="cube orange plus drone flight uav" onclick="openComponentDetails('cubeorange')">
+                        <div class="comp-image-placeholder">🛸</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>Cube Orange+</h3>
+                            <p>Best for: Enterprise drones. High performance flight processor with dual isolated IMU modules.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- Holybro Durandal -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="holybro durandal autopilot board" onclick="openComponentDetails('durandal')">
+                        <div class="comp-image-placeholder">🛸</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>Holybro Durandal</h3>
+                            <p>Best for: Autonomous drones. High-end STM32H7 processor architecture with temperature control.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- NXP i.MX RT1060 -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="nxp i.mx rt1060 real time crossover" onclick="openComponentDetails('nxpimx')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>NXP i.MX RT1060</h3>
+                            <p>Best for: Real-time embedded systems. ARM Cortex-M7 crossover processor running at 600 MHz.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+
+                    <!-- TI LaunchPad -->
+                    <div class="comp-grid-card glass-card" data-category="advanced" data-name="ti texas instruments launchpad c2000 msp432" onclick="openComponentDetails('tilaunchpad')">
+                        <div class="comp-image-placeholder">📟</div>
+                        <div class="comp-card-body">
+                            <span class="difficulty-tag advanced">ADVANCED</span>
+                            <h3>TI LaunchPad</h3>
+                            <p>Best for: Industrial embedded systems. High precision DSP controllers from Texas Instruments.</p>
+                            <span class="tech-link">Read Datasheet & pinout &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PROJECT DATABASE VIEW ================= -->
+        <section id="projects-view" class="view-panel">
+            <div class="container page-content">
+                <div class="section-header">
+                    <h1 class="page-title">Project Database</h1>
+                    <p class="section-subtitle">Browse through student prototypes and download schematic blueprints and source code files.</p>
+                </div>
+
+                <!-- Filters panel -->
+                <div class="project-filter-panel glass-card">
+                    <div class="filter-group">
+                        <label for="filter-age">Age Limit</label>
+                        <select id="filter-age" onchange="applyProjectFilters()">
+                            <option value="all">All Ages</option>
+                            <option value="10-12">Ages 10-12</option>
+                            <option value="13-15">Ages 13-15</option>
+                            <option value="16-18">Ages 16-18</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-difficulty">Difficulty</label>
+                        <select id="filter-difficulty" onchange="applyProjectFilters()">
+                            <option value="all">All Difficulties</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-cost">Hardware Cost</label>
+                        <select id="filter-cost" onchange="applyProjectFilters()">
+                            <option value="all">Any Cost</option>
+                            <option value="low">Under ₹1,000</option>
+                            <option value="med">₹1,000 - ₹3,000</option>
+                            <option value="high">Above ₹3,000</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-tech">Technology</label>
+                        <select id="filter-tech" onchange="applyProjectFilters()">
+                            <option value="all">All Technologies</option>
+                            <option value="iot">IoT / WiFi</option>
+                            <option value="robotics">Robotics</option>
+                            <option value="drones">Drones</option>
+                            <option value="ai">AI / Vision</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="resetProjectFilters()">Clear Filters</button>
+                </div>
+
+                <!-- Projects grid -->
+                <div class="projects-grid" id="projects-grid-container">
+                    <!-- Smart Irrigation -->
+                    <div class="project-grid-card glass-card" data-age="10-12" data-diff="beginner" data-cost="low" data-tech="iot" onclick="openProjectDetails('irrigation')">
+                        <div class="project-image-placeholder">🌱</div>
+                        <div class="project-body">
+                            <span class="diff-tag beginner">BEGINNER</span>
+                            <h3>Smart Irrigation System</h3>
+                            <p>Reads soil moisture and automatically starts a mini water pump when soil becomes dry. Stream telemetry online.</p>
+                            <div class="project-tags">
+                                <span>Age 10+</span>
+                                <span>Under ₹1k</span>
+                                <span>IoT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IoT Door Lock -->
+                    <div class="project-grid-card glass-card" data-age="13-15" data-diff="intermediate" data-cost="med" data-tech="iot" onclick="openProjectDetails('doorlock')">
+                        <div class="project-image-placeholder">🔒</div>
+                        <div class="project-body">
+                            <span class="diff-tag intermediate">INTERMEDIATE</span>
+                            <h3>IoT Smart Door Lock</h3>
+                            <p>Uses RFID tokens or a custom local mobile app to unlock solenoid gates. Logs logs to a spreadsheet.</p>
+                            <div class="project-tags">
+                                <span>Age 13+</span>
+                                <span>₹1k-₹3k</span>
+                                <span>WiFi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drone Telemetry -->
+                    <div class="project-grid-card glass-card" data-age="16-18" data-diff="advanced" data-cost="high" data-tech="drones" onclick="openProjectDetails('drone')">
+                        <div class="project-image-placeholder">🛸</div>
+                        <div class="project-body">
+                            <span class="diff-tag advanced">ADVANCED</span>
+                            <h3>Drone Autonomous Telemetry</h3>
+                            <p>Configure Pixhawk boards to run autonomous coordinate path planning while transmitting GPS points over Lora radio.</p>
+                            <div class="project-tags">
+                                <span>Age 16+</span>
+                                <span>Above ₹3k</span>
+                                <span>Drones</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Vision Robot -->
+                    <div class="project-grid-card glass-card" data-age="16-18" data-diff="advanced" data-cost="high" data-tech="ai" onclick="openProjectDetails('ai-robot')">
+                        <div class="project-image-placeholder">🤖</div>
+                        <div class="project-body">
+                            <span class="diff-tag advanced">ADVANCED</span>
+                            <h3>AI Object Sorter Robot</h3>
+                            <p>Interfaces a Jetson Nano to coordinate robotic arms. Recognizes and sorts trash dynamically using neural net classification.</p>
+                            <div class="project-tags">
+                                <span>Age 16+</span>
+                                <span>Above ₹3k</span>
+                                <span>AI Vision</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- ================= PORTFOLIO VIEW ================= -->
+        <section id="portfolio-view" class="view-panel">
+            <div class="container page-content">
+                <div class="section-header">
+                    <h1 class="page-title">Workshop Portfolio</h1>
+                    <p class="section-subtitle">Highlights from our live cohorts, hands-on student demos, and robotics testing sessions.</p>
+                </div>
+
+                <!-- Grid categories filter -->
+                <div class="filter-pills-row centered">
+                    <button class="pill active" data-portfolio-filter="all" onclick="filterPortfolio('all')">All Images</button>
+                    <button class="pill" data-portfolio-filter="workshop" onclick="filterPortfolio('workshop')">Live Workshops</button>
+                    <button class="pill" data-portfolio-filter="drone" onclick="filterPortfolio('drone')">Drone Flight Demos</button>
+                    <button class="pill" data-portfolio-filter="robotics" onclick="filterPortfolio('robotics')">Robotics Labs</button>
+                    <button class="pill" data-portfolio-filter="student" onclick="filterPortfolio('student')">Student Projects</button>
+                </div>
+
+                <!-- Gallery grid -->
+                <div class="portfolio-gallery-grid" id="portfolio-gallery-container">
+                    <!-- Photo 1 -->
+                    <div class="gallery-item glass-card" data-group="workshop" onclick="openLightbox('assets/workshop_screenshot.png', 'Live mentorship showing student DHT sensor setup.')">
+                        <img src="assets/workshop_screenshot.png" alt="Free Workshop Preview" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-cat-label">WORKSHOP</span>
+                            <h4>IoT Live Mentoring Session</h4>
+                        </div>
+                    </div>
+
+                    <!-- Photo 2 -->
+                    <div class="gallery-item glass-card" data-group="student" onclick="openLightbox('assets/home_screenshot.png', 'Landing page preview displaying drones and arms in action.')">
+                        <img src="assets/home_screenshot.png" alt="STEM Platform Preview" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-cat-label">STUDENT</span>
+                            <h4>Smart Rover Telemetry Output</h4>
+                        </div>
+                    </div>
+
+                    <!-- Photo 3 -->
+                    <div class="gallery-item glass-card" data-group="drone" onclick="openLightbox('assets/logo.jpg', 'BuildVerse design logo highlighting neon green circuit paths.')">
+                        <img src="assets/logo.jpg" alt="Drone flight tracking" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-cat-label">DRONES</span>
+                            <h4>Autonomous Drone Testing</h4>
+                        </div>
+                    </div>
+
+                    <!-- Photo 4 -->
+                    <div class="gallery-item glass-card" data-group="robotics" onclick="openLightbox('assets/workshop_screenshot.png', 'Students coding robotics kinematics.')">
+                        <img src="assets/workshop_screenshot.png" alt="Robotics arm workspace" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <span class="gallery-cat-label">ROBOTICS</span>
+                            <h4>Dynamic Arm Sorting Lab</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials Sub-section -->
+                <div class="testimonials-container">
+                    <h2 class="sub-heading text-center">What Parents and Principals Say</h2>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card glass-card">
+                            <p class="testimonial-quote">"My son Rohan (14) was addicted to gaming. Since joining BuildVerse, he has built three physical gadgets, configured WiFi relays, and now wants to study Embedded Systems at college. Highly worth the monthly cost!"</p>
+                            <div class="testimonial-author">
+                                <span class="author-avatar">👩‍💼</span>
+                                <div>
+                                    <h5>Ananya Murthy</h5>
+                                    <span>Parent of 8th Grader • Bengaluru</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card glass-card">
+                            <p class="testimonial-quote">"BuildVerse has solved the biggest issue in STEM teaching — hands-on practical setups. Our students didn't just learn from slides; they debugged raw C++ files and soldered components. An excellent curriculum integration."</p>
+                            <div class="testimonial-author">
+                                <span class="author-avatar">👨‍🏫</span>
+                                <div>
+                                    <h5>Dr. Sandeep Bose</h5>
+                                    <span>Principal, DPS School • Pune</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= COMMUNITY VIEW ================= -->
+        <section id="community-view" class="view-panel">
+            <div class="container page-content">
+                <div class="section-header text-center">
+                    <h1 class="page-title">The BuildVerse Guild</h1>
+                    <p class="section-subtitle">Collaborate with peers, ask debugging questions to developers, and get updates about upcoming tournaments.</p>
+                </div>
+
+                <div class="community-invite-grid" style="display: flex; justify-content: center;">
+                    <!-- WhatsApp -->
+                    <div class="invite-card glass-card neon-green-glow" style="max-width: 500px; width: 100%;">
+                        <div class="invite-icon">💬</div>
+                        <h3>WhatsApp Channels</h3>
+                        <p>Receive immediate alerts regarding new project templates, homework templates, rescheduled classes, and contest schedules.</p>
+                        <a href="https://wa.me/919000000000" target="_blank" class="btn btn-success btn-glow">Join WhatsApp Hub</a>
+                    </div>
+                </div>
+
+                <!-- Community events timeline -->
+                <div class="upcoming-events-container glass-card">
+                    <h3>Upcoming Virtual Meetups</h3>
+                    <div class="event-timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">JUL 04</span>
+                            <div class="timeline-content">
+                                <h4>Open Hardware Debug Night</h4>
+                                <p>Join our lead mentors on WhatsApp Community live to fix loose solder points, write custom interrupts, and organize code packages.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">JUL 11</span>
+                            <div class="timeline-content">
+                                <h4>AI Robotics Guest Lecture</h4>
+                                <p>A 1-hour session by an IIT Madras researcher detailing how autonomous warehouse rovers navigate safely using LiDAR arrays.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CONTACT VIEW ================= -->
+        <section id="contact-view" class="view-panel">
+            <div class="container page-content">
+                <div class="contact-layout-grid">
+                    <!-- Form Column -->
+                    <div class="contact-form-col glass-card neon-glow-border">
+                        <h2>Send a Message</h2>
+                        <p>Have questions about monthly billing plans, hardware shipments, or school integrations? Get in touch with support.</p>
+                        
+                        <form id="contact-us-form" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="contact-name">Full Name *</label>
+                                <input type="text" id="contact-name" required placeholder="e.g., Rajesh Sen">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email Address *</label>
+                                <input type="email" id="contact-email" required placeholder="e.g., rajesh@domain.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-role">I am a *</label>
+                                <select id="contact-role" required>
+                                    <option value="parent">Parent</option>
+                                    <option value="principal">School Principal / Educator</option>
+                                    <option value="student">Student</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-msg">Message *</label>
+                                <textarea id="contact-msg" required placeholder="How can we help your child or school succeed?" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-glow">Send Support Request</button>
+                        </form>
+                    </div>
+
+                    <!-- Details Column -->
+                    <div class="contact-details-col">
+                        <h1 class="page-title">Get in Touch</h1>
+                        <p class="contact-sub">Our support team is available from 9 AM to 8 PM (Monday to Saturday) to assist you.</p>
+
+                        <div class="contact-methods-grid">
+                            <a href="https://wa.me/916360660450" target="_blank" class="contact-method-card glass-card">
+                                <div class="method-icon">💬</div>
+                                <div>
+                                    <h4>WhatsApp Support</h4>
+                                    <p>+91 63606 60450</p>
+                                </div>
+                            </a>
+
+                            <a href="tel:+916360660450" class="contact-method-card glass-card">
+                                <div class="method-icon">📞</div>
+                                <div>
+                                    <h4>Direct Call Hotline</h4>
+                                    <p>+91 63606 60450</p>
+                                </div>
+                            </a>
+
+                            <a href="https://www.instagram.com/joinbuildverse?igsh=MWp4cTY0dXJmcWdlbQ==" target="_blank" class="contact-method-card glass-card">
+                                <div class="method-icon">📸</div>
+                                <div>
+                                    <h4>Instagram Profile</h4>
+                                    <p>@joinbuildverse</p>
+                                </div>
+                            </a>
+
+                            <a href="mailto:hello@buildverse.in" class="contact-method-card glass-card">
+                                <div class="method-icon">✉️</div>
+                                <div>
+                                    <h4>Email Desk</h4>
+                                    <p>hello@buildverse.in</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Location Map styled inside a container -->
+                        <div class="map-container glass-card">
+                            <div class="map-header">
+                                <span class="map-icon">📍</span>
+                                <div>
+                                    <h4>BuildVerse HQ Bangalore</h4>
+                                    <span class="map-address">Bengaluru, yelahanka</span>
+                                </div>
+                            </div>
+                            <!-- Mock interactive map layout using SVGs and HTML styling -->
+                            <div class="mock-map">
+                                <div class="map-road road-h"></div>
+                                <div class="map-road road-v"></div>
+                                <div class="map-pin">📍</div>
+                                <span class="map-location-label">BUILDVERSE HQ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= DASHBOARDS VIEW ================= -->
+        <section id="dashboards-view" class="view-panel">
+            <div class="container page-content">
+                <!-- Dashboard profile header tabs -->
+                <div class="dashboard-header-portal glass-card">
+                    <span>PORTAL SWITCHER:</span>
+                    <div class="portal-btns">
+                        <button class="portal-btn active" data-portal="student" onclick="switchDashboardPortal('student')">Student Portal</button>
+                        <button class="portal-btn" data-portal="parent" onclick="switchDashboardPortal('parent')">Parent Portal</button>
+                        <button class="portal-btn" data-portal="mentor" onclick="switchDashboardPortal('mentor')">Mentor Portal</button>
+                        <button class="portal-btn" data-portal="admin" onclick="switchDashboardPortal('admin')">Admin Portal</button>
+                    </div>
+                </div>
+
+                <!-- ================= STUDENT DASHBOARD ================= -->
+                <div class="dashboard-portal-panel active" id="portal-student">
+                    <!-- Glassmorphic Paywall overlay -->
+                    <div class="paywall-overlay glass-card hidden" id="student-paywall">
+                        <div class="paywall-content">
+                            <span class="paywall-icon">🚀</span>
+                            <h2>BuildVerse Student Pass Required</h2>
+                            <p>Unlock live 1-on-1 mentorship, official competitions arena, custom electronics hardware packages, and verified certificates.</p>
+                            <div class="paywall-price">₹999<span>/month</span></div>
+                            <button class="btn btn-primary btn-glow" id="btn-activate-student-pass" onclick="activateStudentPass()">Activate My Pass Now</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <!-- Student Stats row -->
+                        <div class="glass-card stat-summary-card col-span-3">
+                            <div class="user-profile-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span class="profile-pic">🧒</span>
+                                    <div>
+                                        <h2 id="student-welcome-name">Welcome back, Aarav Sharma!</h2>
+                                        <p id="student-welcome-plan">Explorer Plan • Enrolled in IoT track</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Sign Out</button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Circle widget -->
+                        <div class="glass-card flex-col-center">
+                            <h3>Course Progress</h3>
+                            <div class="progress-circle-widget">
+                                <svg class="progress-ring" width="120" height="120">
+                                    <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.05)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                                    <circle class="progress-ring-filled" stroke="#00e5ff" stroke-width="8" fill="transparent" r="50" cx="60" cy="60" style="stroke-dasharray: 314.16; stroke-dashoffset: 94.24;"/>
+                                </svg>
+                                <div class="progress-circle-text">70%</div>
+                            </div>
+                            <p class="text-center" style="margin-top: 1rem;">7 of 10 milestones completed</p>
+                        </div>
+
+                        <!-- Gamification Scorecard -->
+                        <div class="glass-card">
+                            <h3>Gamified Level</h3>
+                            <div class="scorecard-value gradient-text">LVL 12</div>
+                            <hr class="card-divider">
+                            <div class="scorecard-list">
+                                <div>🪙 <strong>340 Coins</strong> in wallet</div>
+                                <div>🔥 <strong>5 Days</strong> streak active</div>
+                                <div>🏁 <strong>#142</strong> in global rankings</div>
+                            </div>
+                        </div>
+
+                        <!-- Certificates Card -->
+                        <div class="glass-card">
+                            <h3>My Certificates</h3>
+                            <div class="certificates-list-widget">
+                                <div class="certificate-row">
+                                    <span>🔌 Arduino Basics</span>
+                                    <button class="btn btn-secondary btn-xs" onclick="downloadCertificate('Arduino Basics')">Download</button>
+                                </div>
+                                <div class="certificate-row">
+                                    <span>📶 ESP8266 IoT Web</span>
+                                    <button class="btn btn-secondary btn-xs" onclick="downloadCertificate('ESP8266 IoT Web')">Download</button>
+                                </div>
+                                <div class="certificate-row disabled">
+                                    <span>🧠 OpenCV Sorting (Locked)</span>
+                                    <span>🔒 Lock</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project submissions tracker -->
+                        <div class="glass-card col-span-2">
+                            <h3>My Active Projects</h3>
+                            <div class="projects-track-list">
+                                <div class="project-track-item">
+                                    <div>
+                                        <strong>Smart Irrigation Sensor</strong>
+                                        <p>Status: Review Pending</p>
+                                    </div>
+                                    <span class="status-tag status-pending">Pending</span>
+                                </div>
+                                <div class="project-track-item">
+                                    <div>
+                                        <strong>Web Relays Webserver</strong>
+                                        <p>Status: Approved • 100 XP gained</p>
+                                    </div>
+                                    <span class="status-tag status-approved">Approved</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Competitions enrolled list -->
+                        <div class="glass-card col-span-2">
+                            <h3>Active Competitions</h3>
+                            <div class="competitions-track-list">
+                                <div class="comp-track-item">
+                                    <div>
+                                        <strong>IoT Innovation Cup</strong>
+                                        <p>Deadline: Ends in 12 days</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-xs btn-glow" onclick="navigateTo('competition')">Submit Code</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ================= PARENT DASHBOARD ================= -->
+                <div class="dashboard-portal-panel" id="portal-parent">
+                    <!-- Glassmorphic Paywall overlay -->
+                    <div class="paywall-overlay glass-card hidden" id="parent-paywall">
+                        <div class="paywall-content">
+                            <span class="paywall-icon">💳</span>
+                            <h2>Subscription Inactive</h2>
+                            <p>Activate your child's BuildVerse pass to unlock live mentor tracking, attendance reports, and monthly electronics kit shipping.</p>
+                            <div class="paywall-price">₹999<span>/month</span></div>
+                            <button class="btn btn-primary btn-glow" id="btn-activate-parent-pass" onclick="activateStudentPass()">Activate Child's Pass</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="glass-card col-span-3">
+                            <div class="user-profile-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span class="profile-pic">👩‍💼</span>
+                                    <div>
+                                        <h2 id="parent-welcome-name">Parent Monitoring Hub</h2>
+                                        <p>Monitoring child: <strong id="parent-child-name">Aarav Sharma</strong></p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Sign Out</button>
+                            </div>
+                        </div>
+
+                        <!-- Attendance Tracker -->
+                        <div class="glass-card text-center">
+                            <h3>Attendance Rate</h3>
+                            <div class="scorecard-value gradient-text">96%</div>
+                            <p>24 of 25 live mentoring sessions attended</p>
+                            <hr class="card-divider">
+                            <span class="badge-status">Excellent Status</span>
+                        </div>
+
+                        <!-- Subscription Status -->
+                        <div class="glass-card">
+                            <h3>Subscription Billing</h3>
+                            <div class="subscription-billing-widget">
+                                <div class="billing-row">
+                                    <span>Active Plan:</span> <strong>Explorer</strong>
+                                </div>
+                                <div class="billing-row">
+                                    <span>Renewal Date:</span> July 24, 2026
+                                </div>
+                                <div class="billing-row">
+                                    <span>Price:</span> ₹999/month
+                                </div>
+                                <button class="btn btn-secondary btn-sm btn-block" style="margin-top: 1rem;" onclick="manageSubscription()">Manage Billing Method</button>
+                            </div>
+                        </div>
+
+                        <!-- Report Card PDF Download -->
+                        <div class="glass-card">
+                            <h3>Bi-Weekly Reports</h3>
+                            <div class="reports-download-widget">
+                                <div class="report-download-row">
+                                    <span>June Report (Week 1-2)</span>
+                                    <button class="btn btn-secondary btn-xs" onclick="downloadReport('June Week 1-2')">PDF</button>
+                                </div>
+                                <div class="report-download-row">
+                                    <span>June Report (Week 3-4)</span>
+                                    <button class="btn btn-secondary btn-xs" onclick="downloadReport('June Week 3-4')">PDF</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Child's Projects Tracker -->
+                        <div class="glass-card col-span-2" id="parent-child-projects-card">
+                            <h3>Child's Active Projects</h3>
+                            <div class="projects-track-list" id="parent-projects-list">
+                                <div class="text-center" style="color: var(--color-text-secondary); padding: 1rem 0;">No active projects recorded.</div>
+                            </div>
+                        </div>
+
+                        <!-- Mentor direct message box -->
+                        <div class="glass-card col-span-4">
+                            <h3>Direct Message to Mentor (Dr. Anuj Sen)</h3>
+                            <form onsubmit="handleMessageMentor(event)">
+                                <textarea id="mentor-msg-input" placeholder="Type a message to Aarav's mentor... (e.g. Schedule shift requests, focus assistance)" rows="3" style="width: 100%; margin-bottom: 1rem;"></textarea>
+                                <button type="submit" class="btn btn-primary btn-sm btn-glow">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= MENTOR DASHBOARD ================= -->
+                <div class="dashboard-portal-panel" id="portal-mentor">
+                    <div class="dashboard-grid">
+                        <div class="glass-card col-span-3">
+                            <div class="user-profile-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span class="profile-pic">👨‍🏫</span>
+                                    <div>
+                                        <h2 id="mentor-welcome-name">Mentor Operations Console</h2>
+                                        <p id="mentor-welcome-cohort">Assigned Cohort: <strong>IoT-Beta (5 Students)</strong></p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Sign Out</button>
+                            </div>
+                        </div>
+
+                        <!-- Student Cohort Roster -->
+                        <div class="glass-card col-span-2">
+                            <h3>Active Roster</h3>
+                            <div class="table-wrapper">
+                                <table class="leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Grade</th>
+                                            <th>Last Project</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Aarav Sharma</td>
+                                            <td>Grade 8</td>
+                                            <td>Smart Irrigation</td>
+                                            <td><button class="btn btn-secondary btn-xs" onclick="gradeStudent('Aarav')">Grade</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Diya Rao</td>
+                                            <td>Grade 9</td>
+                                            <td>Smart Irrigation</td>
+                                            <td><button class="btn btn-secondary btn-xs" onclick="gradeStudent('Diya')">Grade</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Neil Das</td>
+                                            <td>Grade 7</td>
+                                            <td>Blink LED</td>
+                                            <td><button class="btn btn-secondary btn-xs" onclick="gradeStudent('Neil')">Grade</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Assignment submissions pending -->
+                        <div class="glass-card">
+                            <h3>Unreviewed Code</h3>
+                            <div class="reports-download-widget">
+                                <div class="report-download-row">
+                                    <span>Aarav_Irrigation.ino</span>
+                                    <button class="btn btn-primary btn-xs btn-glow" onclick="reviewCodeSubmission('Aarav')">Review</button>
+                                </div>
+                                <div class="report-download-row">
+                                    <span>Diya_Moisture_Read.py</span>
+                                    <button class="btn btn-primary btn-xs btn-glow" onclick="reviewCodeSubmission('Diya')">Review</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ================= ADMIN DASHBOARD ================= -->
+                <div class="dashboard-portal-panel" id="portal-admin">
+                    <div class="dashboard-grid">
+                        <div class="glass-card col-span-3">
+                            <div class="user-profile-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span class="profile-pic">⚙️</span>
+                                    <div>
+                                        <h2 id="admin-welcome-name">System Executive Dashboard</h2>
+                                        <p>Access Level: SuperAdmin</p>
+                                    </div>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" onclick="handleLogout()">Sign Out</button>
+                            </div>
+                        </div>
+
+                        <!-- Growth stats -->
+                        <div class="glass-card">
+                            <h3>Total Revenue</h3>
+                            <div class="scorecard-value gradient-text">₹12,45,000</div>
+                            <p>+18% growth this month</p>
+                        </div>
+                        <div class="glass-card">
+                            <h3>Active Members</h3>
+                            <div class="scorecard-value gradient-text">642</div>
+                            <p>+40 new signups this week</p>
+                        </div>
+                        <div class="glass-card">
+                            <h3>Active Mentors</h3>
+                            <div class="scorecard-value gradient-text">84</div>
+                            <p>100% capacity filled</p>
+                        </div>
+
+                        <!-- Analytics log -->
+                        <div class="glass-card col-span-2">
+                            <h3>System Logs</h3>
+                            <div class="system-logs-widget">
+                                <div>🕒 23:04:12 - Webhook: Subscription payment received for user UID-8490 (₹1,999)</div>
+                                <div>🕒 22:58:04 - Workshop: Seat reserved by Priya Sharma (aarav@email.com)</div>
+                                <div>🕒 22:45:10 - Competition: Leaderboard recalculated (142 users mapped)</div>
+                            </div>
+                        </div>
+
+                        <!-- User Management list -->
+                        <div class="glass-card col-span-2">
+                            <h3>User Registrations</h3>
+                            <div class="table-wrapper">
+                                <table class="leaderboard-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Email</th>
+                                            <th>Plan</th>
+                                            <th>Joined</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>priya@email.com</td>
+                                            <td>Explorer</td>
+                                            <td>Just now</td>
+                                            <td><button class="btn btn-secondary btn-xs" onclick="banUser('priya')">Edit</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>neil@school.edu</td>
+                                            <td>Innovator</td>
+                                            <td>2 days ago</td>
+                                            <td><button class="btn btn-secondary btn-xs" onclick="banUser('neil')">Edit</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Workshop Settings Manager -->
+                        <div class="glass-card col-span-3" id="admin-settings-section">
+                            <h3>Workshop Settings Manager</h3>
+                            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Update the live parameters of the Free ESP8266 Workshop instantly. Changes sync directly to Firestore.</p>
+                            
+                            <form id="admin-settings-form" onsubmit="handleSaveSettings(event)">
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="admin-ws-title">Workshop Title *</label>
+                                        <input type="text" id="admin-ws-title" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-banner">Workshop Banner Image URL / Path</label>
+                                        <input type="text" id="admin-ws-banner">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="admin-ws-desc">Workshop Tagline / Description *</label>
+                                    <textarea id="admin-ws-desc" rows="3" required style="width:100%; font-family:inherit; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #fff; padding: 0.5rem;"></textarea>
+                                </div>
+                                
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="admin-ws-datetime">Date & Time Display *</label>
+                                        <input type="text" id="admin-ws-datetime" required placeholder="e.g., July 15, 2026 • 5:00 PM">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-countdown">Countdown End Time (ISO format) *</label>
+                                        <input type="text" id="admin-ws-countdown" required placeholder="e.g., 2026-07-15T17:00:00">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="admin-ws-status">Registration Status *</label>
+                                        <select id="admin-ws-status" required>
+                                            <option value="open">Open (Accepting Registrations)</option>
+                                            <option value="closed">Closed (Seats Filled / Ended)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-maxseats">Maximum Seats *</label>
+                                        <input type="number" id="admin-ws-maxseats" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-whatsapp">WhatsApp Link *</label>
+                                        <input type="url" id="admin-ws-whatsapp" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="admin-ws-giveaway">Giveaway Information</label>
+                                        <textarea id="admin-ws-giveaway" rows="2" style="width:100%; font-family:inherit; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #fff; padding: 0.5rem;"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-certs">Certificate Details</label>
+                                        <textarea id="admin-ws-certs" rows="2" style="width:100%; font-family:inherit; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #fff; padding: 0.5rem;"></textarea>
+                                    </div>
+                                </div>
+
+                                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #00e5ff;">FAQ Control</h4>
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="admin-ws-faq1-q">FAQ 1 Question</label>
+                                        <input type="text" id="admin-ws-faq1-q">
+                                        <label for="admin-ws-faq1-a" style="margin-top: 0.5rem;">FAQ 1 Answer</label>
+                                        <input type="text" id="admin-ws-faq1-a">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-faq2-q">FAQ 2 Question</label>
+                                        <input type="text" id="admin-ws-faq2-q">
+                                        <label for="admin-ws-faq2-a" style="margin-top: 0.5rem;">FAQ 2 Answer</label>
+                                        <input type="text" id="admin-ws-faq2-a">
+                                    </div>
+                                </div>
+
+                                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #00e5ff;">Mentor Configuration</h4>
+                                <div class="form-group-row">
+                                    <div class="form-group">
+                                        <label for="admin-ws-mentor-name">Lead Mentor Name *</label>
+                                        <input type="text" id="admin-ws-mentor-name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="admin-ws-mentor-title">Lead Mentor Title / Credentials *</label>
+                                        <input type="text" id="admin-ws-mentor-title" required>
+                                    </div>
+                                </div>
+
+                                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #00e5ff;">Registration Fields Control</h4>
+                                <div class="form-group" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="admin-ws-field-exp" checked> Include Previous Experience Field
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                        <input type="checkbox" id="admin-ws-field-tech" checked> Include Interested Tech Field
+                                    </label>
+                                </div>
+
+                                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: #00e5ff;">Gallery Control</h4>
+                                <div class="form-group">
+                                    <label for="admin-ws-gallery">Gallery Image URLs (Comma-separated list)</label>
+                                    <input type="text" id="admin-ws-gallery" placeholder="assets/home_screenshot.png, assets/workshop_screenshot.png">
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-glow" style="margin-top: 1.5rem;">Save Configuration</button>
+                                <span id="admin-save-success" style="color: #39ff14; margin-left: 1.5rem; font-weight: 500; display: none;">✓ Settings Saved successfully!</span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= LOGIN VIEWS ================= -->
+        <section id="student-login-view" class="view-panel">
+            <div class="container page-content flex-col-center" style="min-height: 70vh; justify-content: center; display: flex; align-items: center;">
+                <div class="registration-form-card glass-card neon-glow-border" style="max-width: 450px; width: 100%; margin: 2rem auto;">
+                    <div class="form-header">
+                        <h3>Student Portal Login</h3>
+                        <p>Access your sessions, certificates, competitions, and submit active projects.</p>
+                    </div>
+                    <form id="student-login-form" onsubmit="handleLoginSubmit(event, 'student')">
+                        <div class="form-group">
+                            <label for="student-email-input">Email Address *</label>
+                            <input type="email" id="student-email-input" required placeholder="e.g., student@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="student-password-input">Password *</label>
+                            <input type="password" id="student-password-input" required placeholder="••••••••">
+                        </div>
+                        <div id="student-login-error" class="form-error-msg hidden" style="color: #ff3366; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">Login to Portal</button>
+                        <p class="form-disclosure text-center" style="margin-top: 1rem;">
+                            Don't have an account? <a href="#" onclick="toggleAuthMode('student', 'signup')" style="color: #00e5ff; text-decoration: none;">Sign Up</a>
+                        </p>
+                    </form>
+                    <form id="student-signup-form" class="hidden" onsubmit="handleSignupSubmit(event, 'student')">
+                        <div class="form-group">
+                            <label for="student-name-signup">Full Name *</label>
+                            <input type="text" id="student-name-signup" required placeholder="e.g., Aarav Sharma">
+                        </div>
+                        <div class="form-group">
+                            <label for="student-email-signup">Email Address *</label>
+                            <input type="email" id="student-email-signup" required placeholder="e.g., student@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="student-password-signup">Password *</label>
+                            <input type="password" id="student-password-signup" required placeholder="Min 6 characters">
+                        </div>
+                        <div id="student-signup-error" class="form-error-msg hidden" style="color: #ff3366; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">Create Account</button>
+                        <p class="form-disclosure text-center" style="margin-top: 1rem;">
+                            Already have an account? <a href="#" onclick="toggleAuthMode('student', 'login')" style="color: #00e5ff; text-decoration: none;">Login</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="parent-login-view" class="view-panel">
+            <div class="container page-content flex-col-center" style="min-height: 70vh; justify-content: center; display: flex; align-items: center;">
+                <div class="registration-form-card glass-card neon-glow-border" style="max-width: 450px; width: 100%; margin: 2rem auto;">
+                    <div class="form-header">
+                        <h3>Parent Monitoring Login</h3>
+                        <p>Track student progress, attendance, mentor feedback, and billing status.</p>
+                    </div>
+                    <form id="parent-login-form" onsubmit="handleLoginSubmit(event, 'parent')">
+                        <div class="form-group">
+                            <label for="parent-email-input">Email Address *</label>
+                            <input type="email" id="parent-email-input" required placeholder="e.g., parent@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-password-input">Password *</label>
+                            <input type="password" id="parent-password-input" required placeholder="••••••••">
+                        </div>
+                        <div id="parent-login-error" class="form-error-msg hidden" style="color: #ff3366; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">Login to Portal</button>
+                        <p class="form-disclosure text-center" style="margin-top: 1rem;">
+                            Don't have an account? <a href="#" onclick="toggleAuthMode('parent', 'signup')" style="color: #00e5ff; text-decoration: none;">Sign Up</a>
+                        </p>
+                    </form>
+                    <form id="parent-signup-form" class="hidden" onsubmit="handleSignupSubmit(event, 'parent')">
+                        <div class="form-group">
+                            <label for="parent-name-signup">Full Name *</label>
+                            <input type="text" id="parent-name-signup" required placeholder="e.g., Priya Sharma">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-student-email-signup">Student Email Link *</label>
+                            <input type="email" id="parent-student-email-signup" required placeholder="e.g., student@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-email-signup">Email Address *</label>
+                            <input type="email" id="parent-email-signup" required placeholder="e.g., parent@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="parent-password-signup">Password *</label>
+                            <input type="password" id="parent-password-signup" required placeholder="Min 6 characters">
+                        </div>
+                        <div id="parent-signup-error" class="form-error-msg hidden" style="color: #ff3366; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">Create Account</button>
+                        <p class="form-disclosure text-center" style="margin-top: 1rem;">
+                            Already have an account? <a href="#" onclick="toggleAuthMode('parent', 'login')" style="color: #00e5ff; text-decoration: none;">Login</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="mentor-login-view" class="view-panel">
+            <div class="container page-content flex-col-center" style="min-height: 70vh; justify-content: center; display: flex; align-items: center;">
+                <div class="registration-form-card glass-card neon-glow-border" style="max-width: 450px; width: 100%; margin: 2rem auto;">
+                    <div class="form-header">
+                        <h3>Mentor Console Login</h3>
+                        <p>Manage student rosters, upload assignments, schedule sessions, and submit feedback.</p>
+                    </div>
+                    <form id="mentor-login-form" onsubmit="handleLoginSubmit(event, 'mentor')">
+                        <div class="form-group">
+                            <label for="mentor-email-input">Email Address *</label>
+                            <input type="email" id="mentor-email-input" required placeholder="e.g., mentor@buildverse.in">
+                        </div>
+                        <div class="form-group">
+                            <label for="mentor-password-input">Password *</label>
+                            <input type="password" id="mentor-password-input" required placeholder="••••••••">
+                        </div>
+                        <div id="mentor-login-error" class="form-error-msg hidden" style="color: #ff3366; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">Login to Console</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="admin-login-view" class="view-panel">
+            <div class="container page-content flex-col-center" style="min-height: 70vh; justify-content: center; display: flex; align-items: center;">
+                <div class="registration-form-card glass-card neon-glow-border" style="max-width: 450px; width: 100%; margin: 2rem auto;">
+                    <div class="form-header">
+                        <h3>Admin Executive Login</h3>
+                        <p>Configure live workshop parameters, view registrations, and manage system users.</p>
+                    </div>
+                    <form id="admin-login-form" onsubmit="handleLoginSubmit(event, 'admin')">
+                        <div class="form-group">
+                            <label for="admin-email-input">Email Address *</label>
+                            <input type="email" id="admin-email-input" required placeholder="e.g., admin@buildverse.in">
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-password-input">Password *</label>
+                            <input type="password" id="admin-password-input" required placeholder="••••••••">
+                        </div>
+                        <div id="admin-login-error" class="form-error-msg hidden" style="color: #ff3366; margin-bottom: 1rem; font-size: 0.9rem;"></div>
+                        <button type="submit" class="btn btn-primary btn-block btn-glow">System Executive Access</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating WhatsApp Support Icon -->
+    <a href="https://wa.me/919000000000" class="floating-whatsapp" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.335 4.963L2 22l5.233-1.371a9.936 9.936 0 004.779 1.218h.004c5.506 0 9.989-4.478 9.99-9.985A9.993 9.993 0 0012.012 2zm0 1.832c4.498 0 8.156 3.659 8.157 8.158A8.163 8.163 0 0112 20.147a8.115 8.115 0 01-4.077-1.096l-.293-.174-3.033.795.809-2.955-.19-.304a8.12 8.12 0 01-1.248-4.267c.002-4.498 3.66-8.157 8.157-8.157zm-1.897 2.457c-.12-.267-.247-.272-.361-.277-.093-.004-.201-.004-.309-.004-.108 0-.284.041-.433.203-.148.163-.568.555-.568 1.353 0 .799.582 1.57.663 1.679.081.108 1.146 1.75 2.778 2.455.388.168.69.268.926.343.39.124.745.107 1.026.065.312-.047.962-.393 1.098-.772.135-.379.135-.704.095-.772-.041-.068-.149-.108-.311-.19-.162-.081-.962-.474-1.111-.528-.149-.054-.257-.081-.365.081-.108.162-.42.528-.514.636-.095.108-.189.122-.351.041-.162-.081-.685-.253-1.306-.807-.483-.43-1.077-.962-1.171-1.124-.095-.162-.01-.25.072-.33.073-.073.162-.19.243-.284.081-.095.108-.162.162-.271.054-.108.027-.203-.014-.284-.041-.081-.361-.87-.497-1.189z"/>
+        </svg>
+    </a>
+
+    <!-- DETAIL MODAL FOR COMPONENT UNIVERSE -->
+    <div class="modal-overlay hidden" id="component-detail-modal">
+        <div class="modal-card glass-card">
+            <button class="modal-close-btn" onclick="closeComponentDetails()">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                </svg>
+            </button>
+            <div class="modal-grid-content">
+                <div class="modal-visual-col">
+                    <div class="modal-img-placeholder" id="modal-comp-icon">🔌</div>
+                    <div class="pinout-box glass-card">
+                        <h4>Wiring Pinout Blueprint</h4>
+                        <div class="pinout-ascii" id="modal-comp-pinout">
+                            [=== Pins Blueprint ===]
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-text-col">
+                    <span class="difficulty-tag" id="modal-comp-difficulty">BEGINNER</span>
+                    <h2 id="modal-comp-title">Arduino Board</h2>
+                    <p id="modal-comp-desc">Details</p>
+                    
+                    <hr class="card-divider">
+
+                    <div class="modal-meta-specs-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                        <div>⚡ <strong>Operating Voltage:</strong> <span id="modal-comp-voltage" style="color: var(--color-accent-cyan); font-weight: 700;">5V</span></div>
+                        <div>🔌 <strong>Pins Count:</strong> <span id="modal-comp-pins" style="color: var(--color-accent-green); font-weight: 700;">30 pins</span></div>
+                    </div>
+
+                    <h3>Specifications</h3>
+                    <ul class="spec-list" id="modal-comp-specs">
+                        <li>Volts: 5V</li>
+                    </ul>
+
+                    <h3>Tutorial Guide</h3>
+                    <p id="modal-comp-tutorials" style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.4; margin-bottom: 1.5rem;">Step-by-step tutorial.</p>
+
+                    <h3>Example Projects / Code</h3>
+                    <div class="code-editor-header">
+                        <span>source_code.ino / main.py</span>
+                        <button class="copy-code-btn" onclick="copyModalCode()">Copy Code</button>
+                    </div>
+                    <pre class="code-editor-pre"><code id="modal-comp-code">void setup() {}</code></pre>
+
+                    <h3>Applications</h3>
+                    <p id="modal-comp-apps">Projects details</p>
+
+                    <h3>Related Components</h3>
+                    <div class="related-chips" id="modal-comp-related">
+                        <span>Arduino Nano</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DETAIL MODAL FOR PROJECT DATABASE -->
+    <div class="modal-overlay hidden" id="project-detail-modal">
+        <div class="modal-card glass-card">
+            <button class="modal-close-btn" onclick="closeProjectDetails()">
+                <svg viewBox="0 0 24 24" width="20" height="20">
+                    <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                    <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                </svg>
+            </button>
+            <div class="modal-grid-content">
+                <div class="modal-visual-col">
+                    <div class="modal-img-placeholder" id="modal-proj-icon">🌱</div>
+                    <div class="pinout-box glass-card">
+                        <h4>Required Bill of Materials</h4>
+                        <ul class="materials-list" id="modal-proj-materials">
+                            <li>ESP32 module</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-text-col">
+                    <span class="difficulty-tag" id="modal-proj-difficulty">BEGINNER</span>
+                    <h2 id="modal-proj-title">Project Title</h2>
+                    
+                    <hr class="card-divider">
+
+                    <h3>Build Instructions Guide</h3>
+                    <ol class="build-steps-list" id="modal-proj-steps">
+                        <li>Plug in board</li>
+                    </ol>
+
+                    <h3>Core Skills Learned</h3>
+                    <div class="skills-learned-grid" id="modal-proj-skills">
+                        <span>Hardware Wiring</span>
+                    </div>
+
+                    <h3>Industry Applications</h3>
+                    <p id="modal-proj-industry">Real-world details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN PORTFOLIO LIGHTBOX VIEW -->
+    <div class="lightbox-overlay hidden" id="lightbox-overlay" onclick="closeLightbox()">
+        <button class="lightbox-close-btn">&times;</button>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <img src="" alt="Zoomed view" id="lightbox-image">
+            <p id="lightbox-caption">Description caption</p>
+        </div>
+    </div>
+
+    <!-- Footers -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand-col">
+                <a href="#" class="nav-brand" onclick="navigateTo('home')">
+                    <img src="assets/logo.jpg" alt="BuildVerse Logo" class="brand-logo-img">
+                    <span class="brand-name">BUILD<span class="gradient-text">VERSE</span></span>
+                </a>
+                <p class="footer-tagline">Build | Compete | Innovate</p>
+                <p class="footer-desc">Premium production-grade STEM education platform. Building physical code, logic, and hardware portfolios that matter.</p>
+            </div>
+            
+            <div class="footer-links-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('components')">Component Universe</a></li>
+                    <li><a href="#" onclick="navigateTo('projects')">Project Database</a></li>
+                    <li><a href="#" onclick="navigateTo('competition')">Competition Arena</a></li>
+                    <li><a href="#" onclick="navigateTo('portfolio')">Workshop Portfolio</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('workshop')">Free Workshop</a></li>
+                    <li><a href="#" onclick="navigateTo('membership')">Membership Plans</a></li>
+                    <li><a href="#" onclick="navigateTo('community')">Community Guild</a></li>
+                    <li><a href="#" onclick="navigateTo('contact')">Contact Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-col">
+                <h4>Get in touch</h4>
+                <ul>
+                    <li>💬 <a href="https://wa.me/916360660450" target="_blank">WhatsApp Support</a></li>
+                    <li>📞 <a href="tel:+916360660450">+91 63606 60450</a></li>
+                    <li>📸 <a href="https://www.instagram.com/joinbuildverse?igsh=MWp4cTY0dXJmcWdlbQ==" target="_blank">Instagram</a></li>
+                    <li>✉️ <a href="mailto:hello@buildverse.in">hello@buildverse.in</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="footer-divider">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 BuildVerse. All Rights Reserved.</p>
+            <p>Made for Innovators in India.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

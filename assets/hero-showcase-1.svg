@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="420" viewBox="0 0 300 420">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="brand1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#39ff14"/>
+      <stop offset="100%" stop-color="#00e5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="420" fill="url(#bg1)"/>
+  <rect x="1.5" y="1.5" width="297" height="417" fill="none" stroke="url(#brand1)" stroke-width="1.5" opacity="0.5"/>
+  <!-- Robot head icon -->
+  <rect x="95" y="130" width="110" height="90" rx="18" fill="none" stroke="url(#brand1)" stroke-width="4"/>
+  <circle cx="128" cy="172" r="9" fill="url(#brand1)"/>
+  <circle cx="172" cy="172" r="9" fill="url(#brand1)"/>
+  <path d="M120 200 L180 200" stroke="url(#brand1)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M150 130 L150 105" stroke="url(#brand1)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="150" cy="95" r="9" fill="url(#brand1)"/>
+  <text x="150" y="300" font-family="Outfit, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle">ROBOTICS</text>
+  <text x="150" y="326" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="2" fill="#8e8e93" text-anchor="middle">PLACEHOLDER IMAGE</text>
+</svg>

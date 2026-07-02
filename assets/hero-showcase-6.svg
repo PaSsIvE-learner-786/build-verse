@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="420" viewBox="0 0 300 420">
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="brand6" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#39ff14"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="420" fill="url(#bg6)"/>
+  <rect x="1.5" y="1.5" width="297" height="417" fill="none" stroke="url(#brand6)" stroke-width="1.5" opacity="0.5"/>
+  <!-- 3D printing / layered prism icon -->
+  <path d="M150 108 L204 138 L204 210 L150 240 L96 210 L96 138 Z" fill="none" stroke="url(#brand6)" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M96 138 L150 168 L204 138 M150 168 L150 240" fill="none" stroke="url(#brand6)" stroke-width="3.5" opacity="0.8"/>
+  <path d="M112 178 L188 178 M108 196 L192 196" stroke="url(#brand6)" stroke-width="3" opacity="0.55"/>
+  <text x="150" y="300" font-family="Outfit, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle">3D PRINTING</text>
+  <text x="150" y="326" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="2" fill="#8e8e93" text-anchor="middle">PLACEHOLDER IMAGE</text>
+</svg>

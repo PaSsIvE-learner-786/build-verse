@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="420" viewBox="0 0 300 420">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="brand4" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#39ff14"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="420" fill="url(#bg4)"/>
+  <rect x="1.5" y="1.5" width="297" height="417" fill="none" stroke="url(#brand4)" stroke-width="1.5" opacity="0.5"/>
+  <!-- Drone icon -->
+  <circle cx="150" cy="175" r="5" fill="url(#brand4)"/>
+  <path d="M150 175 L110 140 M150 175 L190 140 M150 175 L110 210 M150 175 L190 210" stroke="url(#brand4)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="110" cy="140" r="18" fill="none" stroke="url(#brand4)" stroke-width="4"/>
+  <circle cx="190" cy="140" r="18" fill="none" stroke="url(#brand4)" stroke-width="4"/>
+  <circle cx="110" cy="210" r="18" fill="none" stroke="url(#brand4)" stroke-width="4"/>
+  <circle cx="190" cy="210" r="18" fill="none" stroke="url(#brand4)" stroke-width="4"/>
+  <text x="150" y="300" font-family="Outfit, Arial, sans-serif" font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle">DRONES</text>
+  <text x="150" y="326" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="2" fill="#8e8e93" text-anchor="middle">PLACEHOLDER IMAGE</text>
+</svg>
